@@ -29,7 +29,7 @@ CREATE TABLE lane(
 --CREATE board TABLE
 CREATE TABLE board(
   b_id INT,
-  b_title VARCHAR2(50),
+  b_title VARCHAR2(50) NOT NULL,
   b_desc VARCHAR2(200),
   PRIMARY KEY(b_id)
 );
@@ -37,7 +37,7 @@ CREATE TABLE board(
 --CREATE story TABLE
 CREATE TABLE story(
   s_id INT,
-  s_title VARCHAR2(50),
+  s_title VARCHAR2(50) NOT NULL,
   s_desc VARCHAR2(200),
   s_points INT,
   l_id INT NOT NULL,
@@ -70,15 +70,15 @@ CREATE TABLE users(
 --CREATE action TABLE
 CREATE TABLE action(
   a_id INT,
-  a_name VARCHAR2(30) NOT NULL,
+  a_name VARCHAR2(30),
   PRIMARY KEY(a_id)
 );
 
 --CREATE history TABLE 
 CREATE TABLE history(
   h_id INT,
-  u_id INT NOT NULL,
-  a_id INT NOT NULL,
+  u_id INT,
+  a_id INT,
   h_desc VARCHAR2(200),
   h_time TIMESTAMP,
   PRIMARY KEY(h_id),
