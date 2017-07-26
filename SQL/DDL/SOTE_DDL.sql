@@ -39,7 +39,7 @@ CREATE TABLE story(
   s_id INT,
   s_title VARCHAR2(50) NOT NULL,
   s_desc VARCHAR2(200),
-  s_points INT,
+  s_points INT NOT NULL,
   l_id INT NOT NULL,
   b_id INT NOT NULL,
   PRIMARY KEY(s_id),
