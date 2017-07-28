@@ -29,3 +29,7 @@ SOTE/.classpath
 SOTE/.project
 SOTE/.settings/
 .recommenders
+
+#Intelij
+SOTE/.idea/
+SOTE/out/
