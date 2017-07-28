@@ -1,3 +1,8 @@
+---Creating DB
+CREATE USER sote_db IDENTIFIED BY p4ssw0rd;
+---Grant permissions
+GRANT CONNECT, RESOURCE TO sote_db;
+
 --DROP Tables
 DROP TABLE boardusers;
 DROP TABLE permission;
