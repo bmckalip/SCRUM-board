@@ -1,11 +1,7 @@
---DDL - Data Definition Language
-
---Creating DB
+---Creating DB
 CREATE USER sote_db IDENTIFIED BY p4ssw0rd;
-
---Grant permissions
+---Grant permissions
 GRANT CONNECT, RESOURCE TO sote_db;
-
 
 --DROP Tables
 DROP TABLE boardusers;
@@ -18,14 +14,6 @@ DROP TABLE story;
 DROP TABLE task;
 DROP TABLE lane;
 
-
---CREATE lane TABLE
-CREATE TABLE lane(
-  l_id INT,
-  l_name VARCHAR2(30) NOT NULL,
-  PRIMARY KEY(l_id)
-);
-
 --CREATE board TABLE
 CREATE TABLE board(
   b_id INT,
@@ -33,7 +21,14 @@ CREATE TABLE board(
   b_desc VARCHAR2(200),
   PRIMARY KEY(b_id)
 );
-
+--CREATE lane TABLE
+CREATE TABLE lane(
+  l_id INT,
+  l_name VARCHAR2(30) NOT NULL,
+  b_id INT NOT NULL,
+  PRIMARY KEY(l_id),
+  FOREIGN KEY (b_id) REFERENCES board(b_id)
+);
 --CREATE story TABLE
 CREATE TABLE story(
   s_id INT,
@@ -41,12 +36,9 @@ CREATE TABLE story(
   s_desc VARCHAR2(200),
   s_points INT NOT NULL,
   l_id INT NOT NULL,
-  b_id INT NOT NULL,
   PRIMARY KEY(s_id),
-  FOREIGN KEY(l_id) REFERENCES lane(l_id),
-  FOREIGN KEY(b_id) REFERENCES board(b_id)
+  FOREIGN KEY(l_id) REFERENCES lane(l_id)
 );
-
 --CREATE task TABLE
 CREATE TABLE task(
   t_id INT,
@@ -56,7 +48,6 @@ CREATE TABLE task(
   PRIMARY KEY(t_id),
   FOREIGN KEY(s_id) REFERENCES story(s_id)
 );
-
 --CREATE users TABLE
 CREATE TABLE users(
   u_id INT,
@@ -74,7 +65,7 @@ CREATE TABLE action(
   PRIMARY KEY(a_id)
 );
 
---CREATE history TABLE 
+--CREATE history TABLE
 CREATE TABLE history(
   h_id INT,
   u_id INT,
