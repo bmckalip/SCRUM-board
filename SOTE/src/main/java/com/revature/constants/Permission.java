@@ -8,9 +8,9 @@ package com.revature.constants;
  */
 public class Permission{
 	public static final short 	VIEW = 1, DELETE = 2, 
-								ADD_MEMBER = 3, REMOVE_MEMBER = 4,
-								ADD_STORY = 5, REMOVE_STORY = 6, MOVE_STORY = 7, 
-								ADD_TASK = 8, REMOVE_TASK = 9;
+					ADD_MEMBER = 3, REMOVE_MEMBER = 4,
+					ADD_STORY = 5, REMOVE_STORY = 6, MOVE_STORY = 7, 
+					ADD_TASK = 8, REMOVE_TASK = 9;
 	
 	/**
 	 * Returns the short associated with the permission name
