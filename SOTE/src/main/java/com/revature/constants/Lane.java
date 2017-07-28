@@ -1,7 +1,7 @@
 package com.revature.constants;
 
 /**
- * defines the type lane
+ * defines the type lane (for swim lanes)
  * @author Brian McKalip
  *
  */
