@@ -5,44 +5,27 @@ package com.revature.constants;
  * @author Brian McKalip
  *
  */
-public enum Lane{
-	NULL, TODO, IN_PROGRESS, TEST, VERIFY, DONE;
+public class Lane{
+	public static final short TODO = 1, IN_PROGRESS = 2, TEST = 3, VERIFY = 4, DONE = 5;
 	
-	public static Lane getLaneByName(String name){
-		switch(name.toLowerCase()){
-			case "todo":
-			case "to do":
+	public static short getLaneByName(String name){
+		switch(name.toUpperCase()){
+			case "TODO":
+			case "TO DO":
 				return Lane.TODO;
-			case "in progress":
-			case "inprogress":
+			case "IN PROGRESS":
+			case "INPROGRESS":
 				return Lane.IN_PROGRESS;
-			case "test":
-			case "testing":
+			case "TEST":
+			case "TESTING":
 				return Lane.TEST;
-			case "verify":
-			case "verifying":
+			case "VERIFY":
+			case "VERIFYING":
 				return Lane.VERIFY;
-			case "done":
+			case "DONE":
 				return Lane.DONE;
 			default:
-				return Lane.NULL;
-		}
-	}
-	
-	public static Lane getLaneById(int id){
-		switch(id){
-			case 1:
-				return Lane.TODO;
-			case 2:
-				return Lane.IN_PROGRESS;
-			case 3:
-				return Lane.TEST;
-			case 4:
-				return Lane.VERIFY;
-			case 5:
-				return Lane.DONE;
-			default:
-				return Lane.NULL;
+				return 0;
 		}
 	}
 };
