@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.2.xsd
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-    <context:component-scan base-package="com.revature"></context:component-scan>
-    <tx:annotation-driven/>
+	<!-- enable component scan -->
+	<context:component-scan base-package="com.revature"></context:component-scan>
 
-    <bean id = "myDataSource" class = "org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value = "oracle.jdbc.driver.OracleDriver"></property>
-        <property name= "url" value = "jdbc:oracle:thin:@localhost:1521:XE"></property>
-        <property name="username" value = "sote_db"></property>
-        <property name="password" value = "123"></property>
-    </bean>
+	<!-- turn on aop -->
+	<aop:aspectj-autoproxy />
 
-    <bean id = "mySessionFactory" class = "org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref ="myDataSource"></property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key = "hibernate.dialect"> org.hibernate.dialect.Oracle10gDialect</prop>
-                <prop key = "hibernate.show_sql">true</prop>
-                <prop key = "hibernate.hbm2ddl.auto"></prop>
-            </props>
-        </property>
-        <property name="packagesToScan" value = "com.revature.pojo"/>
-    </bean>
-    <bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref = "mySessionFactory"></property>
-    </bean>
+	<!-- make spring check for @transactionals and related annotations -->
+	<tx:annotation-driven />
+
+	<!-- register the data source bean -->
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+		<property name="username" value="sote_db"></property>
+		<property name="password" value="123"></property>
+	</bean>
+
+	<!--  register the session factory bean using the datasource -->
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect"> org.hibernate.dialect.Oracle10gDialect</prop>
+				<!-- show sql queries from hibernate for debugging - turn off for production -->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto"></prop>  -->
+			</props>
+		</property>
+		<property name="packagesToScan" value="com.revature.pojo" />
+	</bean>
+
+	<!-- register the transaction manager bean using the sessionfactory (Spring ORM) -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory"></property>
+	</bean>
 </beans>
