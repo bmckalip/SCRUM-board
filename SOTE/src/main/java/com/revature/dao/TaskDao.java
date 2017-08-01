@@ -4,6 +4,7 @@ import com.revature.pojo.Task;
 
 public interface TaskDao {
 
-    public void createTask(Task t);
-    public Task getTaskById(Task t);
+    void createTask(Task task);
+    Task getTaskById(Task task);
+
 }

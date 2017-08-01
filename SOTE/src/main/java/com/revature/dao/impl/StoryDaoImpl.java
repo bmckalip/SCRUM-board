@@ -10,20 +10,21 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class StoryDaoImpl implements StoryDao{
 
-
     @Autowired
     private SessionFactory sessionFactory;
 
-
     @Override
-    public void createStory(Story s) {
+    public void createStory(Story story) {
+        System.out.println("Creating a Story - FROM The StoryDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        session.save(s);
+        session.save(story);
+
     }
 
     @Override
-    public Story getStoryById(Story s) {
+    public Story getStoryById(Story story) {
+        System.out.println("Creating a Story - FROM The LaneDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        return (Story) session.get(Story.class, s.getId());
+        return (Story) session.get(Story.class, story.getStoryId());
     }
 }

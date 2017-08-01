@@ -4,6 +4,6 @@ import com.revature.pojo.Story;
 
 public interface StoryDao {
 
-    public void createStory(Story s);
-    public Story getStoryById(Story s);
+    void createStory(Story story);
+    Story getStoryById(Story story);
 }

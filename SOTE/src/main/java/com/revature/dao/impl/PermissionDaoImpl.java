@@ -1,6 +1,8 @@
 package com.revature.dao.impl;
 
 import com.revature.dao.PermissionDao;
+import com.revature.pojo.Permission;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,11 +12,18 @@ public class PermissionDaoImpl implements PermissionDao{
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Override
+    public void createPermission(Permission permission) {
+        System.out.println("Creating a Permission - FROM The PermissionDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.save(permission);
 
-    /*
-    TODO: Implement relevant DAO methods in this class
-     */
+    }
 
-
-
+    @Override
+    public Permission getPermissionById(Permission permission) {
+        System.out.println("Creating a Permission - FROM The PermissionDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        return (Permission) session.get(Permission.class, permission.getPermissionId());
+    }
 }

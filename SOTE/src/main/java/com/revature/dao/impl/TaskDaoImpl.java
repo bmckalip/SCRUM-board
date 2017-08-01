@@ -14,14 +14,16 @@ public class TaskDaoImpl implements TaskDao{
     private SessionFactory sessionFactory;
 
     @Override
-    public void createTask(Task t) {
+    public void createTask(Task task) {
+        System.out.println("Creating a Task - FROM The TaskDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        session.save(t);
+        session.save(task);
+    }
+    @Override
+    public Task getTaskById(Task task) {
+        System.out.println("Retrieving a Task by ID - FROM The TaskDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        return (Task) session.get(Task.class, task.getTaskId());
     }
 
-    @Override
-    public Task getTaskById(Task t) {
-        Session session = sessionFactory.getCurrentSession();
-        return (Task) session.get(Task.class, t.getId());
-    }
 }

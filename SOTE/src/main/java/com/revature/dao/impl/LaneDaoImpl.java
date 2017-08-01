@@ -14,15 +14,17 @@ public class LaneDaoImpl implements LaneDao{
     private SessionFactory sessionFactory;
 
     @Override
-    public void createLane(Lane l) {
+    public void createLane(Lane lane) {
+        System.out.println("Creating a Lane - FROM The LaneDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        session.save(l);
+        session.save(lane);
     }
 
     @Override
-    public Lane getLaneById(Lane l) {
+    public Lane getLaneById(Lane lane) {
+        System.out.println("Retrieving a Lane - FROM The LaneDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        return (Lane) session.get(Lane.class, l.getId());
+        return (Lane) session.get(Lane.class, lane.getLaneId());
     }
 
 

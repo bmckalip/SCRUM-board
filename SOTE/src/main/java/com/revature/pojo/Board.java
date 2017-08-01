@@ -1,62 +1,85 @@
 package com.revature.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "board")
-public class Board implements Serializable {
+@Table(name="board")
+public class Board{
+
     @Id
-    @Column(name = "b_id")
-    private int id;
-    @Column(name = "b_title")
-    private String name;
+    @SequenceGenerator(name = "seq", sequenceName = "board_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @Column(name="b_id")
+    private int boardId;
+    @Column(name="b_title")
+    private String boardTitle;
     @Column(name = "b_desc")
-    private String description;
+    private String boardDescription;
+    @OneToMany(cascade = CascadeType.ALL,
+        mappedBy = "board", orphanRemoval = true)
+    private List<Lane> lane = new ArrayList<>();
 
     public Board(){}
 
+    public Board(String boardTitle, String boardDescription) {
+        this.boardTitle = boardTitle;
+        this.boardDescription = boardDescription;
+    }
 
-    public Board(int id, String name, String description){
-        super();
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+
+        Board board = (Board) o;
+
+        if (getBoardId() != board.getBoardId()) return false;
+        if (getBoardTitle() != null ? !getBoardTitle().equals(board.getBoardTitle()) : board.getBoardTitle() != null)
+            return false;
+        return getBoardDescription() != null ? getBoardDescription().equals(board.getBoardDescription()) : board.getBoardDescription() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getBoardId();
+        result = 31 * result + (getBoardTitle() != null ? getBoardTitle().hashCode() : 0);
+        result = 31 * result + (getBoardDescription() != null ? getBoardDescription().hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "Board{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "boardId=" + boardId +
+                ", boardTitle='" + boardTitle + '\'' +
+                ", boardDescription='" + boardDescription + '\'' +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getBoardId() {
+        return boardId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
     }
 
-    public String getName() {
-        return name;
+    public String getBoardTitle() {
+        return boardTitle;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBoardTitle(String boardTitle) {
+        this.boardTitle = boardTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBoardDescription() {
+        return boardDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBoardDescription(String boardDescription) {
+        this.boardDescription = boardDescription;
     }
 }
