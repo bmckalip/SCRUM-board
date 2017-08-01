@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SCRUM Board</title>
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+	
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<link rel="stylesheet" href="swimlane.css" type="text/css" />
+<script src="swimlane.js"></script>
+
+
+</head>
+
+<body>
+<h2>Board Title</h2>
+<button type="button" class="glyphicon glyphicon-plus" title="Add a Swimlane"></button>
+<!-- These are divs that contain the swimlanes -->
+	<div class="container-fluid span2 col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">To Do   
+					<button type="button" class="glyphicon glyphicon-plus buttonalign" id="addStory" title="Add Story"></button>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<ul id="swimlane1Content" class="list-group">
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid span2 col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">In Progress</h3>
+			</div>
+			<div class="panel-body">
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid span2 col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Testing</h3>
+			</div>
+			<div class="panel-body">
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid span2 col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Verified </h3>
+			</div>
+			<div class="panel-body">
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid span2 col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Done</h3>
+			</div>
+			<div class="panel-body">
+			
+			</div>
+		</div>
+	</div>
+	
+	
+	
+</body>
+</html>
