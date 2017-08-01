@@ -31,57 +31,66 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aspects</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-orm</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-webmvc</artifactId>
-			</dependency>
 
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-core</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>commons-dbcp</groupId>
-				<artifactId>commons-dbcp</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>javax.persistence</groupId>
-				<artifactId>persistence-api</artifactId>
-				<version>1.0.2</version>
-			</dependency>
-				<dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-		</dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<!-- ojdbc7 jar (third party repo, not maven repo) -->
+		<!-- https://mvnrepository.com/artifact/com.github.noraui/ojdbc7 -->
+		<dependency>
+			<groupId>com.github.noraui</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.2</version>
+		</dependency>
+
+	</dependencies>
 </project>
