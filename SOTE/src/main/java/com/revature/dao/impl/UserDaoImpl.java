@@ -1,7 +1,11 @@
 package com.revature.dao.impl;
 
 import com.revature.dao.UserDao;
+import com.revature.pojo.User;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,9 +15,27 @@ public class UserDaoImpl implements UserDao{
     @Autowired
     private SessionFactory sessionFactory;
 
-    /*
-    TODO: Implement relevant DAO methods in this class
-     */
+    @Override
+    public void createUser(User user) {
+        System.out.println("Creating user - FROM the UserDaoImpl class ");
+        Session session = sessionFactory.getCurrentSession();
+        session.save(user);
+    }
 
+    @Override
+    public User getUserById(User user) {
+        System.out.println("Retrieving user by ID - FROM the UserDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        return (User) session.get(User.class, user.getUserId());
+    }
 
+    @Override
+    public User getUserByEmail(User user) {
+        System.out.println("Retrieving user by EMAIL - FROM the UserDaoImpl class");
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class, user.getUserEmail());
+        criteria.add(
+                Restrictions.like("userEmail", user.getUserEmail())
+        );
+        return (User) criteria.uniqueResult();
+    }
 }
