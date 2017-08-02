@@ -27,6 +27,18 @@ public class LaneDaoImpl implements LaneDao{
         return (Lane) session.get(Lane.class, lane.getLaneId());
     }
 
+    @Override
+    public void updateLane(Lane lane) {
+        System.out.println("Updating a Lane - FROM The LaneDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(lane);
+    }
 
+    @Override
+    public void deleteLaneById(Lane lane) {
+        System.out.println("Deleting a Lane - FROM The LaneDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(lane);
 
+    }
 }

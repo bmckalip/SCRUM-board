@@ -1,5 +1,7 @@
 package com.revature.pojo;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,7 +11,7 @@ public class User implements Serializable{
 
     @Id
     @SequenceGenerator(name = "seq", sequenceName = "users_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
     @Column(name = "u_id")
     private int userId;
 
@@ -110,5 +112,8 @@ public class User implements Serializable{
         this.userPassword = userPassword;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
+    }
+    public User(String userEmail){
+        this.userEmail = userEmail;
     }
 }

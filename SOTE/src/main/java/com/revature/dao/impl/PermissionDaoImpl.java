@@ -26,4 +26,20 @@ public class PermissionDaoImpl implements PermissionDao{
         Session session = sessionFactory.getCurrentSession();
         return (Permission) session.get(Permission.class, permission.getPermissionId());
     }
+
+    @Override
+    public void updatePermission(Permission permission) {
+        System.out.println("Updating a Permission - FROM The PermissionDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(permission);
+
+    }
+
+    @Override
+    public void deletePermission(Permission permission) {
+        System.out.println("Deleting a Permission - FROM The PermissionDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(permission);
+
+    }
 }

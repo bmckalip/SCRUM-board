@@ -12,47 +12,62 @@ import org.springframework.transaction.annotation.Transactional;
 public class AppService {
 
     @Autowired
-    private TaskDao taskDao;
-    @Autowired
-    private StoryDao storyDao;
+    private BoardDao boardDao;
+
     @Autowired
     private LaneDao laneDao;
     @Autowired
-    private BoardDao boardDao;
+    private PermissionDao permissionDao;
+    @Autowired
+    private StoryDao storyDao;
+    @Autowired
+    private TaskDao taskDao;
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private PermissionDao permissionDao;
-
 
     @Transactional
-    public void createTask(Task task){
-        taskDao.createTask(task);
-    }
+    public void saveUser(User user){ userDao.createUser(user);}
 
     @Transactional
-    public void createStory(Story story){storyDao.createStory(story);}
+    public void updateUser(User user){userDao.updateUser(user);}
 
     @Transactional
-    public void createLane(Lane lane){laneDao.createLane(lane);}
+    public void saveTask(Task task){taskDao.createTask(task);}
 
     @Transactional
-    public void createBoard(Board board){ boardDao.createBoard(board);}
+    public void updateTask(Task task){taskDao.updateTask(task);}
 
     @Transactional
-    public void createPermission(Permission permission){permissionDao.createPermission(permission);}
+    public void saveStory(Story story){storyDao.createStory(story);}
 
-    public Task getTaskById(Task task){
-        return taskDao.getTaskById(task);
-    }
-    public Story getStoryById(Story story){ return storyDao.getStoryById(story);}
-    public Lane getLaneById(Lane lane){ return laneDao.getLaneById(lane);}
-    public Board getBoardById(Board board){
-        return boardDao.getBoardById(board);
-    }
-    public Permission getPermissionById(Permission permission){ return permissionDao.getPermissionById(permission);}
+    @Transactional
+    public void updateStory(Story story){storyDao.updateStory(story);}
+
+    @Transactional
+    public void savePermission(Permission permission){permissionDao.createPermission(permission);}
+
+    @Transactional
+    public void updatePermission(Permission permission){permissionDao.updatePermission(permission);}
+
+    @Transactional
+    public void saveLane(Lane lane){laneDao.createLane(lane);}
+
+    @Transactional
+    public void updateLane(Lane lane){laneDao.updateLane(lane);}
+
+    @Transactional
+    public void saveBoard(Board board){boardDao.createBoard(board);}
+
+    @Transactional
+    public void updateBoard(Board board){boardDao.updateBoard(board);}
 
 
-
+    public User getUserById(User user){ return userDao.getUserById(user);}
+    public User getUserByEmail(User user){ return userDao.getUserByEmail(user);}
+    public Board getBoardById(Board board){return boardDao.getBoardById(board);}
+    public Permission getPermissionById(Permission permission){return permissionDao.getPermissionById(permission);}
+    public Lane getLaneById(Lane lane){return laneDao.getLaneById(lane);}
+    public Task getTaskById(Task task){return taskDao.getTaskById(task);}
+    public Story getStoryById(Story story){return storyDao.getStoryById(story);}
 
 }

@@ -11,24 +11,20 @@ public class Driver {
 
         System.out.println("Hello Spring ORM");
 
-        ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("WEB-INF/beans.xml");
         AppService app = (AppService) ac.getBean("AppService");
 
-        /*Permission permission = new Permission("BoardCreator");
-        System.out.println(permission);*/
+        User testUser = new User();
 
-        Board testBoard = new Board();
-        testBoard.setBoardId(1);
+        testUser.setUserEmail("ram@ram.ram");
+        /*
+        testUser.setUserEmail("ram@ram.ram");
+        testUser.setUserFirstName("Ram");
+        testUser.setUserLastName("Sanchez");
+        testUser.setUserPassword("123");
 
-        Lane testLane = new Lane();
-        testLane.setLaneId(1);
-
-        Story testStory = new Story();
-        testStory.setStoryId(1);
-
-        Board board = app.getBoardById(testBoard);
-        Story story = app.getStoryById(testStory);
-        Lane lane = app.getLaneById(testLane);
+        app.saveUser(testUser); */
+        System.out.println(app.getUserByEmail(testUser));
 
 
     }

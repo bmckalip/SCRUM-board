@@ -26,4 +26,18 @@ public class BoardDaoImpl implements BoardDao{
         Session session = sessionFactory.getCurrentSession();
         return (Board) session.get(Board.class, board.getBoardId());
     }
+
+    @Override
+    public void updateBoard(Board board) {
+        System.out.println("Updating a board - FROM the BoardDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(board);
+    }
+
+    @Override
+    public void deleteBoardById(Board board) {
+        System.out.println("Deleting a board - FROM the BoardDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(board);
+    }
 }

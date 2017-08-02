@@ -26,4 +26,18 @@ public class TaskDaoImpl implements TaskDao{
         return (Task) session.get(Task.class, task.getTaskId());
     }
 
+    @Override
+    public void updateTask(Task task) {
+        System.out.println("Updating a Task by ID - FROM The TaskDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(task);
+    }
+
+    @Override
+    public void deleteTask(Task task) {
+        System.out.println("Deleting a Task by ID - FROM The TaskDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(task);
+
+    }
 }

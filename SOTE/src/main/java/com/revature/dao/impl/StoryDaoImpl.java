@@ -27,4 +27,23 @@ public class StoryDaoImpl implements StoryDao{
         Session session = sessionFactory.getCurrentSession();
         return (Story) session.get(Story.class, story.getStoryId());
     }
+
+    @Override
+    public void updateStory(Story story) {
+        System.out.println("Updating a Permission - FROM The PermissionDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(story);
+
+    }
+
+    @Override
+    public void deleteStory(Story story) {
+        System.out.println("Deleting a Permission - FROM The PermissionDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(story);
+
+    }
+
+
+
 }
