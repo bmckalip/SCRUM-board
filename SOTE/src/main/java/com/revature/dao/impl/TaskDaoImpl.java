@@ -7,6 +7,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * 
+ * @author Joseph Nguyen
+ *
+ */
+
 @Repository
 public class TaskDaoImpl implements TaskDao{
 
@@ -24,4 +30,22 @@ public class TaskDaoImpl implements TaskDao{
         Session session = sessionFactory.getCurrentSession();
         return (Task) session.get(Task.class, t.getId());
     }
+
+	@Override
+	public void changeTaskDescription(Task t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeTaskStatus(Task t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTaskById(Task t) {
+		// TODO Auto-generated method stub
+		
+	}
 }
