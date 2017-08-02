@@ -53,7 +53,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -86,7 +85,11 @@
 
 		<!-- ojdbc7 jar (third party repo, not maven repo) -->
 		<!-- https://mvnrepository.com/artifact/com.github.noraui/ojdbc7 -->
-
+		<dependency>
+			<groupId>com.github.noraui</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.2</version>
+		</dependency>
 
 	</dependencies>
 </project>
