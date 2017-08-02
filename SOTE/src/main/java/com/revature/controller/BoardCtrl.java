@@ -14,9 +14,10 @@ import com.revature.pojo.Board;
  * @author Brian McKalip
  *
  */
-@RequestMapping("/board")
+
 @Controller
-public class BoardController {
+@RequestMapping("/board")
+public class BoardCtrl {
 	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public ResponseEntity<Board> newBoard(@RequestParam("user_id") int user_id, @RequestParam("title") String title){
 		//TODO: call service method to create board

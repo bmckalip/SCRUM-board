@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @RequestMapping("/lane")
 @Controller
-public class Lane {
+public class LaneCtrl {
 	
 	@RequestMapping(value="/new", method=RequestMethod.POST)
-	public ResponseEntity<Lane> newLane(@RequestParam("board_id") int board_id, @RequestParam("title") String title){
+	public ResponseEntity<LaneCtrl> newLane(@RequestParam("board_id") int board_id, @RequestParam("title") String title){
 		//TODO: call service method to create the lane
-		return new ResponseEntity<Lane>(HttpStatus.OK);
+		return new ResponseEntity<LaneCtrl>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public ResponseEntity<Lane> deleteLane(@RequestParam("id") int id){
+	public ResponseEntity<LaneCtrl> deleteLane(@RequestParam("id") int id){
 		//TODO: call service method to delete the lane
-		return new ResponseEntity<Lane>(HttpStatus.OK);
+		return new ResponseEntity<LaneCtrl>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/rename", method=RequestMethod.POST)
-	public ResponseEntity<Lane> deleteLane(@RequestParam("title") String title){
+	public ResponseEntity<LaneCtrl> renameLane(@RequestParam("title") String title){
 		//TODO: call service method to rename the lane
-		return new ResponseEntity<Lane>(HttpStatus.OK);
+		return new ResponseEntity<LaneCtrl>(HttpStatus.OK);
 	}
 }

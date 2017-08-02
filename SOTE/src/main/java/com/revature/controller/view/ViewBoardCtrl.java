@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/board")
-public class BoardController {
+public class ViewBoardCtrl {
 
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/board",method=RequestMethod.GET)
 	public String loadBoard(){
 		return "/static/features/board/board.html";
 	}

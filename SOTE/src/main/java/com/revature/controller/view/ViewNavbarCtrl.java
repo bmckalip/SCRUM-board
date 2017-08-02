@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/home")
-public class HomepageCtrl {
-
+@RequestMapping(value="/navbar")
+public class ViewNavbarCtrl {
+	
 	@RequestMapping(method=RequestMethod.GET)
-	public String loadHomepage(){
-		return "/static/features/homepage/homepage.html";
+	public String loadNavbar(){
+		return "/static/features/navbar/navbar.html";
 	}
 }
