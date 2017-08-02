@@ -42,7 +42,7 @@
 				<!-- <prop key="hibernate.hbm2ddl.auto"></prop>  -->
 			</props>
 		</property>
-		<property name="packagesToScan" value="com.revature.pojo"></property>
+		<property name="packagesToScan" value="com.revature"></property>
 	</bean>
 
 	<!-- register the transaction manager bean using the sessionfactory (Spring ORM) -->
