@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value="/navbar")
 public class ViewNavbarCtrl {
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/navbar", method=RequestMethod.GET)
 	public String loadNavbar(){
 		return "/static/features/navbar/navbar.html";
 	}

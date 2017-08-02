@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+	</head>
+	<body data-ng-app="scrumBoard">
+		<!-- provide different views -->
+		<div>
+			<ul>
+				<li> <a href="#!home">Home</a></li>
+				<li> <a href="#!board">Board</a></li>
+				<li> <a href="#!logout">Logout</a></li>
+			</ul>
+		</div>
+		
+		<!-- angular view: this is called routing (to different views) -->
+		<div ng-view></div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>	
+		<script src="app.js"></script>	
+		<script src="AboutCtrl.js"></script>	
+	</body>
+</html>

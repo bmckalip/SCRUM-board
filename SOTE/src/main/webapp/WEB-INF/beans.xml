@@ -58,5 +58,9 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
-
+	
+	<!-- 
+	<mvc:resources location="/static/features" mapping="/static/features/**"></mvc:resources>
+	 -->
+	
 </beans>
