@@ -22,14 +22,15 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- Startup the Spring Container -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
 	<!-- Specify location of beans.xml -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/beans.xml</param-value>
 	</context-param>
+	
+		<!-- Startup the Spring Container -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
 </web-app>
