@@ -1,3 +1,8 @@
+/**
+ * @author Sarah Kummerfeldt
+ * 
+ */
+
 window.onload = function(){
 	console.log(document);
 //	document.getElementById("addStory").addEventListener("click", openAddStoryModal);

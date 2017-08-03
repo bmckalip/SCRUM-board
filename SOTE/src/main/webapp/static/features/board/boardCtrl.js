@@ -1,3 +1,8 @@
+/**
+ * @author Sarah Kummerfeldt
+ * 
+ */
+
 app.controller('boardCtrl', function() {
 
 	 document.getElementById("addStory").addEventListener("click", openAddStoryModal);
