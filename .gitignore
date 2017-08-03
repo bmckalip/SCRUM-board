@@ -28,3 +28,11 @@ RemoteSystemsTempFiles/
 SOTE/.classpath
 SOTE/.project
 SOTE/.settings/
+.recommenders/
+
+#Intelij
+SOTE/.idea/
+SOTE/out/
+
+#Other
+Servers/
