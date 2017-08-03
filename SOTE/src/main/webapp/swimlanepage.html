@@ -36,69 +36,46 @@
 
 </head>
 
-<body>
-<h2>Board Title</h2>
-<button type="button" class="glyphicon glyphicon-plus" title="Add a Swimlane"></button>
+<body id="bodyClass">
+
+<!-- This is to display a modal for adding a story -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    Story Title: <input type="text" placeholder="Enter a Story Title" id="storyTitle"/><br><br>
+    <button type="button" value="submitStory" id="submitStory">Create Story</button>
+  </div>
+</div>
+
+
+
+
+
+<h2 id="boardTitle" contenteditable="true">Board Title</h2>
+<h4 id="boardDesc" contenteditable="true">Board Description</h4>
+<button type="button" class="glyphicon glyphicon-plus" title="Add a Swimlane" id="addSwimLane"></button>
+<button type="button" title="Burndown Chart" id="openBurnDown">Burndown Chart</button><br>
+
+
 <!-- These are divs that contain the swimlanes -->
 	<div class="container-fluid span2 col-md-2">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">To Do   
-					<button type="button" class="glyphicon glyphicon-plus buttonalign" id="addStory" title="Add Story"></button>
-				</h3>
+			<div class="panel-heading" id="lane1heading">
+				<p class="panel-title" id="lane1header" contenteditable="true">To Do   
+				</p>
+				<button type="button" class="glyphicon glyphicon-plus buttonalign" id="addStory" title="Add Story"></button>
 			</div>
-			<div class="panel-body">
-				<ul id="swimlane1Content" class="list-group">
-				</ul>
-			</div>
-		</div>
-	</div>
-	
-	<div class="container-fluid span2 col-md-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">In Progress</h3>
-			</div>
-			<div class="panel-body">
 			
-			</div>
-		</div>
-	</div>
-	
-	<div class="container-fluid span2 col-md-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Testing</h3>
-			</div>
-			<div class="panel-body">
 			
+			<div class="panel-body"  ondrop="drop(event)" ondragover="allowDrop(event)">
+				<div id="swimlane1Content" class="list-group">
+				
+				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="container-fluid span2 col-md-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Verified </h3>
-			</div>
-			<div class="panel-body">
-			
-			</div>
-		</div>
-	</div>
-	
-	<div class="container-fluid span2 col-md-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Done</h3>
-			</div>
-			<div class="panel-body">
-			
-			</div>
-		</div>
-	</div>
-	
-	
-	
+
 </body>
 </html>
