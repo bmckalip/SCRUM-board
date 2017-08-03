@@ -11,7 +11,7 @@ app.controller('boardCtrl', function() {
 	 document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
 		
 	 //Make the header dynamic
-	 document.getElementById("lane1header").addEventListener("blur", updateLaneHead);
+	 //document.getElementById("lane1header").addEventListener("blur", updateLaneHead);
 
 	// Add click event to story titles to open modal
 	function openAddStoryModal() {
@@ -59,7 +59,6 @@ app.controller('boardCtrl', function() {
 			ev.dataTransfer.setData("text", ev.target.id);
 
 		};
-
 		document.getElementById("swimlane1Content").appendChild(node);
 		i++;
 
@@ -98,9 +97,9 @@ app.controller('boardCtrl', function() {
 	}
 	;
 
-	j = 2;
+	var j = 1;
 	function addALane(){    
-	    console.log("adding a lane")
+	    console.log("adding a lane - " + j)
 	    
 	    //Give the divs attributes classes and ids
 	    var containerDiv = document.createElement("DIV");
@@ -144,8 +143,6 @@ app.controller('boardCtrl', function() {
 	    
 	    panelDiv.appendChild(panelBodyDiv);
 	    
-	    
-	    
 	    panelBodyDiv.ondrop = function drop(ev) {
 	        ev.preventDefault();
 	        var data = ev.dataTransfer.getData("text");
@@ -170,13 +167,11 @@ app.controller('boardCtrl', function() {
 	    j++;
 	}
 	
-	function removeLane(e){
-	    console.log(e);
-	    
+	function removeLane(e){	    
 	    var target = e.target.parentNode.parentNode.parentNode;
 	    
 	    target.parentNode.removeChild(target);
-	    
+	    j--;
 	}
 
 	// Add code to update db with new info TEST AND EDIT
