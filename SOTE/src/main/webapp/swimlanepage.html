@@ -30,8 +30,8 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-<link rel="stylesheet" href="swimlane.css" type="text/css" />
-<script src="swimlane.js"></script>
+	<link rel="stylesheet" href="static/features/board/board.css" type="text/css" />
+	<script src="static/features/board/board.js"></script>
 
 
 </head>
@@ -48,18 +48,13 @@
   </div>
 </div>
 
-
-
-
-
 <h2 id="boardTitle" contenteditable="true">Board Title</h2>
 <h4 id="boardDesc" contenteditable="true">Board Description</h4>
 <button type="button" class="glyphicon glyphicon-plus" title="Add a Swimlane" id="addSwimLane"></button>
 <button type="button" title="Burndown Chart" id="openBurnDown">Burndown Chart</button><br>
 
-
 <!-- These are divs that contain the swimlanes -->
-	<div class="container-fluid span2 col-md-2">
+	<div class="container-fluid span2 col-md-2 col-xs-3 col-sm-3">
 		<div class="panel panel-default">
 			<div class="panel-heading" id="lane1heading">
 				<p class="panel-title" id="lane1header" contenteditable="true">To Do   

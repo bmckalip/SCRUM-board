@@ -1,24 +1,15 @@
-/**
- * 	swimlane.js
- */
-
-
 window.onload = function(){
-	document.getElementById("addStory").addEventListener("click", openAddStoryModal);
-	document.getElementById("addSwimLane").addEventListener("click", addALane);
-	document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
-	document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
-	
+	console.log(document);
+//	document.getElementById("addStory").addEventListener("click", openAddStoryModal);
+//	document.getElementById("addSwimLane").addEventListener("click", addALane);
+//	document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
+//	document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
+//	
 	//Make the header dynamic
-	document.getElementById("lane1header").addEventListener("blur", updateLaneHead);
+//	document.getElementById("lane1header").addEventListener("blur", updateLaneHead);
 }
 
-
 //Add click event to story titles to open modal
-
-
-
-//
 function openAddStoryModal(){
 	// Get the modal
 	var modal = document.getElementById('myModal');
@@ -45,10 +36,6 @@ function openAddStoryModal(){
 	    }
 	}
 }
-
-
-
-
 
 //Function to add a story
 var i = 1;
@@ -80,11 +67,7 @@ function addAStory(){
 	
  //Old code to drag, couldnt get drop to work
 //	$( ".list-group-item" ).draggable();
-	
-
-
 }
-
 
 //Old code to drop---> didnt work
 
@@ -97,7 +80,6 @@ function addAStory(){
 //    }
 //});
 
-
 function allowDrop(ev) {
     ev.preventDefault();
     if (ev.target.getAttribute("draggable") == "true")
@@ -106,8 +88,6 @@ function allowDrop(ev) {
         ev.dataTransfer.dropEffect = "all"; // drop it like it's hot
 };
 
-
-
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
@@ -115,16 +95,12 @@ function drop(ev) {
     ev.target.appendChild(document.getElementById(data));
 };
 
-
-
-
-
 j = 2;
 function addALane(){	
 	console.log("adding a lane")
 	
 	var containerDiv = document.createElement("DIV");
-	containerDiv.className += " " + "container-fluid span2 col-md-2";
+	containerDiv.className += " " + "container-fluid span2 col-md-2 col-xs-3 col-sm-3";
 	
 	var panelDiv = document.createElement("DIV");
 	panelDiv.className += " " + "panel panel-default";
