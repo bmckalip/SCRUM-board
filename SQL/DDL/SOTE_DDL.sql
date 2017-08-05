@@ -1,19 +1,15 @@
----Creating DB
-CREATE USER sote_db IDENTIFIED BY p4ssw0rd;
----Grant permissions
-GRANT CONNECT, RESOURCE TO sote_db;
-
---DROP Tables
+--DROP Tables in THIS ORDER
 DROP TABLE boardusers;
-DROP TABLE permission;
+--DROP TABLE permission;
+--DROP TABLE history;
+--DROP TABLE action;
 DROP TABLE users;
-DROP TABLE history;
-DROP TABLE action;
-DROP TABLE board;
-DROP TABLE story;
 DROP TABLE task;
+DROP TABLE story;
 DROP TABLE lane;
+DROP TABLE board;
 
+--CREATE TABLES in THIS ORDER
 --CREATE board TABLE
 CREATE TABLE board(
   b_id INT,
@@ -53,41 +49,39 @@ CREATE TABLE users(
   u_id INT,
   u_email VARCHAR2(30) UNIQUE NOT NULL,
   u_password VARCHAR2(30) NOT NULL,
+  u_permission VARCHAR2(30) UNIQUE NOT NULL,
   u_fName VARCHAR2(30) NOT NULL,
   u_lName VARCHAR(30) NOT NULL,
   PRIMARY KEY(u_id)
 );
 
+/* DO NOT IMPLEMENT UNLESS YOU CAN MAP IT
 --CREATE action TABLE
 CREATE TABLE action(
   a_id INT,
   a_name VARCHAR2(30),
   PRIMARY KEY(a_id)
 );
-
 --CREATE history TABLE
 CREATE TABLE history(
   h_id INT,
   u_id INT,
-  a_id INT,
-  h_desc VARCHAR2(200),
-  h_time TIMESTAMP,
+  story_points int not null,
+  h_story_created TIMESTAMP NOT NULL,
+  h_story_completed TIMESTAMP,
   PRIMARY KEY(h_id),
-  FOREIGN KEY(u_id) REFERENCES users(u_id),
-  FOREIGN KEY(a_id) REFERENCES action(a_id)
+  FOREIGN KEY(u_id) REFERENCES users(u_id)
 );
-
 --CREATE permission TABLE
 CREATE TABLE permission(
   p_id INT,
   p_type VARCHAR(30),
   PRIMARY KEY(p_id)
 );
-
+*/
 --CREATE boardusers JOIN TABLE
 CREATE TABLE boardusers(
   b_id INT,
   u_id INT,
-  p_id INT,
-  PRIMARY KEY(b_id, u_id, p_id)
+  PRIMARY KEY(b_id, u_id)
 );
