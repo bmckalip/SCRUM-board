@@ -18,7 +18,10 @@ public interface BoardDao {
 	
 	//UPDATE
 	public void changeBoardName(Board b);
+	public Board updateBoard(Board board);
 	
 	//DELETE
 	public void deleteBoardById(Board b);
+
+	
 }

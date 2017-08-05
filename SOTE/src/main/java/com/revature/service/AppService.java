@@ -73,4 +73,10 @@ public class AppService {
 	public void saveBoard(Board board) {
 		boardDao.createBoard(board);
 	}
+    
+    @Transactional
+	public Board updateBoard(int id, Board board) {
+		board.setId(id);
+		return boardDao.updateBoard(board);
+	}
 }

@@ -28,7 +28,8 @@ public class BoardCtrl {
 	AppService service;
 	
 	/**
-	 * 
+	 * Post request for creating a new board. takes in JSON object like:
+	 * {"id": int id, "name" : "String name", "description" : "String description"}
 	 * 
 	 * @author Dillon Tuck
 	 * @param board
@@ -47,6 +48,19 @@ public class BoardCtrl {
 //		//TODO: call service method to delete board
 //		return new ResponseEntity<Board>(HttpStatus.OK);
 //	}
+	
+	/**
+	 * @author Dillon Tuck
+	 * 
+	 * incomplete
+	 */
+   @RequestMapping(value = "/{id}", method=RequestMethod.PUT)
+   public Board findOne(@PathVariable("id") int id, @RequestBody Board board) {
+	   System.out.println("hitting board/"+id+" controller - PUT");
+	   board = service.updateBoard(id, board);
+	   
+       return board;
+   }
 	
 	/**
 	 * @author Dillon Tuck

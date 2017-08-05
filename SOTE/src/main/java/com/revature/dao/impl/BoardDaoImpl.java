@@ -45,4 +45,11 @@ public class BoardDaoImpl implements BoardDao{
 		
 	}
 
+	@Override
+	public Board updateBoard(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(board);
+		return board;
+	}
+
 }
