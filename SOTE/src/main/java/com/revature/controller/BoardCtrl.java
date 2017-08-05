@@ -17,6 +17,7 @@ import com.revature.service.AppService;
 
 
 @RestController
+@RequestMapping("/board")
 public class BoardCtrl {
 	
 	@Autowired
@@ -38,10 +39,10 @@ public class BoardCtrl {
 	 * @author Dillon Tuck
 	 * 
 	 */
-   @RequestMapping(value = "/board/{id}", method=RequestMethod.GET)
+   @RequestMapping(value = "/{id}", method=RequestMethod.GET)
    public Board findOne(@PathVariable("id") int id) {
 	   System.out.println("hitting body/"+id+" controller");
-	   Board board = new Board(id, "test", "test");
+	   Board board = service.getBoardById(id);
 	   System.out.println(board);
        return board;
    }
