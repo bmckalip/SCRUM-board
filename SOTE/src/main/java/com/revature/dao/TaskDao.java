@@ -2,24 +2,15 @@ package com.revature.dao;
 
 import com.revature.pojo.Task;
 
-/**
- * 
- * @author Joseph Nguyen
- *
- */
-
 public interface TaskDao {
 
-	//CREATE
-    public void createTask(Task t);
-    
+    //CREATE
+    void createTask(Task task);
     //READ
-    public Task getTaskById(Task t);
-    
+    Task getTaskById(Task task);
     //UPDATE
-    public void changeTaskDescription(Task t);
-    public void changeTaskStatus(Task t);
-    
+    void updateTask(Task task);
     //DELETE
-    public void deleteTaskById(Task t);
+    void deleteTask(Task task);
+
 }

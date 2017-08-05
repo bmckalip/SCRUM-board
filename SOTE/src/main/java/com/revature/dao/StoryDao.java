@@ -2,25 +2,15 @@ package com.revature.dao;
 
 import com.revature.pojo.Story;
 
-/**
- * 
- * @author Joseph Nguyen
- *
- */
-
 public interface StoryDao {
 
-	//CREATE
-    public void createStory(Story s);
-    
-    //READ
-    public Story getStoryById(Story s);
-    
+    //CREATE
+    void createStory(Story story);
+    //READING
+    Story getStoryById(Story story);
     //UPDATE
-    public void changeStoryName(Story s);
-    public void changeStoryDescription(Story s);
-    public void changeStoryPoints(Story s);
-    
+    void updateStory(Story story);
     //DELETE
-    public void deleteStoryById(Story s);
+    void deleteStory(Story story);
+
 }

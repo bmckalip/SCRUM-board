@@ -7,12 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- * 
- * @author Joseph Nguyen
- *
- */
-
 @Repository
 public class LaneDaoImpl implements LaneDao{
 
@@ -20,29 +14,31 @@ public class LaneDaoImpl implements LaneDao{
     private SessionFactory sessionFactory;
 
     @Override
-    public void createLane(Lane l) {
+    public void createLane(Lane lane) {
+        System.out.println("Creating a Lane - FROM The LaneDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        session.save(l);
+        session.save(lane);
     }
 
     @Override
-    public Lane getLaneById(Lane l) {
+    public Lane getLaneById(Lane lane) {
+        System.out.println("Retrieving a Lane - FROM The LaneDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        return (Lane) session.get(Lane.class, l.getId());
+        return (Lane) session.get(Lane.class, lane.getLaneId());
     }
 
-	@Override
-	public void changeLaneName(Lane l) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void updateLane(Lane lane) {
+        System.out.println("Updating a Lane - FROM The LaneDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(lane);
+    }
 
-	@Override
-	public void deleteLaneById(Lane l) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void deleteLane(Lane lane) {
+        System.out.println("Deleting a Lane - FROM The LaneDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(lane);
 
-
-
+    }
 }
