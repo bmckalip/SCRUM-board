@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+//@Transactional
 @Service(value="AppService")
 public class AppService {
     @Autowired
@@ -51,4 +51,17 @@ public class AppService {
     public Story getStoryById(Story s){
         return storyDao.getStoryById(s);
     }
+    
+    /**
+     * @author Dillon Tuck
+     */
+	public Board getBoardById(int id) {
+		
+//		Board userBoard = new Board();
+//		userBoard.setId(id);
+//		
+//		return boardDao.getBoardById(userBoard);
+		
+		return new Board(id, "Hardcoded Board", "This board is for test purposes");
+	}
 }

@@ -1,1 +1,21 @@
-<h1>This is the login page</h1>
+<div class="container" ng-controller="loginCtrl">
+
+	<div id="login-body">
+		<div><h2 class="text-center">Login</h2></div>
+			<div class="form-group">
+			<label for="loginEmail">Email address</label>
+				<input id="loginEmail" class="form-control" type="text" ng-model="data.email" /> 
+				
+			<label for="loginPassword">Password</label>
+				<input id="loginPassword" class="form-control" type="text" ng-model="data.password" /> 
+			
+			<button class="btn btn-primary form-control" id="subit-login" ng-click="submitLogin">Login</button>
+		</div>
+	</div>
+	
+	
+
+	<!-- logging -->
+	<h1>{{data.email}}</h1>
+	<h1>{{data.password}}</h1>
+</div>

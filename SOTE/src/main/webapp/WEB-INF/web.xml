@@ -21,7 +21,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SpringServlet</servlet-name>
-		<url-pattern>/REST</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- Specify location of beans.xml -->
