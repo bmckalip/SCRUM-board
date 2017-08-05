@@ -28,6 +28,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public Board getBoardById(Board b) {
+		System.out.println("in getBoardById(Board b)");
 		Session session = sessionFactory.getCurrentSession();
 		return (Board) session.get(Board.class, b.getId());
 	}
