@@ -68,4 +68,9 @@ public class AppService {
 		return boardDao.getBoardById(userBoard);
 		
 	}
+    
+    @Transactional
+	public void saveBoard(Board board) {
+		boardDao.createBoard(board);
+	}
 }
