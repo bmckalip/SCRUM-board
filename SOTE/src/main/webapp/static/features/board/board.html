@@ -1,6 +1,8 @@
 
 <div id="bodyClass" data-ng-controller="boardCtrl as board">
 	<h1>This is the board page</h1>
+	
+	
 	<!-- This is to display a modal for adding a story -->
 	<div id="myModal" class="modal">
 		<!-- Modal content -->
@@ -12,35 +14,17 @@
 		</div>
 	</div>
 
-	<h2 id="boardTitle" contenteditable="true">Board Title</h2>
-	<h4 id="boardDesc" contenteditable="true">Board Description</h4>
+	<h2 id="boardTitle" contenteditable="true" ng-model="boardTitle"> {{ name }}</h2>
+	<h4 id="boardDesc" contenteditable="true" ng-model="boardDesc"> {{ desc }}</h4>
 	<button type="button" class="glyphicon glyphicon-road" title="Add a Swimlane" id="addSwimLane"></button>
 	<button type="button" title="Burndown Chart" id="openBurnDown">Burndown Chart</button>
 	<br>
 
-	<!-- These are divs that contain the swimlanes -->
-	
 
-<!-- 
-<div class="container-fluid span2 col-md-2 col-xs-3 col-sm-3">
-		<div class="panel panel-default">
-			<div class="panel-heading" id="lane1heading">
-				<p class="panel-title" id="lane1header" contenteditable="true">To
-					Do</p>
 
-				<button type="button" class="glyphicon glyphicon-remove"
-					title="Delete Lane" id="lane1Btn"></button>
-			</div>
-			
-			<div class="panel-body" ondrop="drop(event)"
-				ondragover="allowDrop(event)">
-				<div id="swimlane1Content" class="list-group"></div>
-
-			</div>
-		</div>
-		</div>
- -->
-
+	<div>
+		<button type="button" title="Save Changes" id="updateBoard">Save Changes</button>
+	</div>
 		
 	
 </div>

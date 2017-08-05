@@ -3,16 +3,18 @@
  * 
  */
 
-app.controller('boardCtrl', function($http) {
+app.controller('boardCtrl', function($http,$scope) {
 
+	retrieveBoard(); 		//Retrieves json containing board information
+	
+	
 	 document.getElementById("addSwimLane").addEventListener("click", addALane);
 	 document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
 	 document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
-		
-	 //Make the header dynamic
-	 //document.getElementById("lane1header").addEventListener("blur", updateLaneHead);
+//	 document.getElementById("openBurnDown").addEventListener("click", openBurndownChart/*?*/);
+	 document.getElementById("updateBoard").addEventListener("click",updateBoard);
 
-	// Add click event to story titles to open modal
+	// Add click event to story titles to open modal to add stories
 	function openAddStoryModal() {
 		// Get the modal
 		var modal = document.getElementById('myModal');
@@ -68,10 +70,15 @@ app.controller('boardCtrl', function($http) {
 		};
 		document.getElementById("swimlane1Content").appendChild(node);
 		
+		//Add the function to open the view story modal here
+		document.getElementById("story" + i).addEventListener("click", console.log("add story event listener"));
+
 		
 	    document.getElementById("story" + i + "Btn").addEventListener("click", function(e){
 	        removeStory(e);
 	    });
+	    
+
 		
 		i++;
 
@@ -82,23 +89,8 @@ app.controller('boardCtrl', function($http) {
 
 
 
-	function allowDrop(ev) {
-		ev.preventDefault();
-		if (ev.target.getAttribute("draggable") == "true")
-			ev.dataTransfer.dropEffect = "none"; // dropping is not allowed
-		else
-			ev.dataTransfer.dropEffect = "all"; // drop it like it's hot
-	}
-	;
-
-	function drop(ev) {
-		ev.preventDefault();
-		var data = ev.dataTransfer.getData("text");
-
-		ev.target.appendChild(document.getElementById(data));
-	}
-	;
-
+	
+	//Code to add a Lane
 	var j = 1;
 	function addALane(){    
 	    console.log("adding a lane - " + j)
@@ -161,6 +153,8 @@ app.controller('boardCtrl', function($http) {
 	        var data = ev.dataTransfer.getData("text");
 	        
 	        ev.target.appendChild(document.getElementById(data));
+	        
+	        
 	    };
 	    
 	    panelBodyDiv.ondragover = function allowDrop(ev) {
@@ -178,11 +172,14 @@ app.controller('boardCtrl', function($http) {
 	    });
 	    
 	 	document.getElementById("addStory").addEventListener("click", openAddStoryModal);
-
+	 	
 	    
 	    j++;
 	}
 	
+	
+	
+	//Removes a lane from a board			===   CHANGE TO DELETE
 	function removeLane(e){	    
 	    var target = e.target.parentNode.parentNode.parentNode;
 	    
@@ -190,19 +187,13 @@ app.controller('boardCtrl', function($http) {
 	    
 	    target.parentNode.removeChild(target);
 	    
-
-	    $http.get("http://localhost:8085/SOTE/rest/board/1")
-		  .then(function(response){ 
-			  console.log(response.data);
-			  });
-	    
 	    
 	    j--;
 	    
 	}
 
 	
-	
+	//Removes a story from the lane			===   CHANGE TO DELETE
 	
 	function removeStory(e){
 		var target = e.target.parentNode;
@@ -210,83 +201,77 @@ app.controller('boardCtrl', function($http) {
 		console.log(target.attributes.id);
 		
 		target.parentNode.removeChild(target);
+		
+		
 		i--;
 	}
 	
 	
 	
-	// Add code to update db with new info TEST AND EDIT
-
+//Edits a lanes header 
 	function updateLaneHead() {
 
 		// add code to submit edited title into db
 		console.log("Editing Lane Header");
 
-		// This needs editing
-		// var xhr = new XMLHttpRequest();
-		//	
-		// xhr.onreadystatechange = function(){
-		// if(xhr.readyState == 4 && xhr.status == 200){
-		// console.log("Edit lane header info loaded")
-		// }
-		// }
-		// xhr.open("POST",'/lane/rename', true);
-		//	
-		// xhr.send();
-
 	}
 
+	
+	//Find endpoints for this
+	//Edits a board title
 	function updateBoardTitle() {
 
-		// add code to submit edited title into db
 		console.log("Editing Board Title");
+		
 	}
 
+	
+	//updates a board description
 	function updateBoardDesc() {
-		// add code to submit edited desc into db
-		console.log("Editing Board Description!")
+		console.log("Editing Board Description!");
+		
+		
 	}
 
-	// Add code to pull story and board info to db -----EDIT/TEST
+	
+	
+	//Below code can be used to populate page
 
-	function retrieveStoryInfo() {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			j = 1;
+	function retrieveBoard() {
 
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				console.log(xhr.responseText);
-				// var storyDTO = JSON.parse(xhr.responseText);
-				//				
-				// //Find way to loop through stories in db and add content to
-				// page
-				//				
-				// if(storyDTO.id != null ){
-				// document.getElementById('story' + j).innerHTML =
-				// storyDTO.name;
-				// j++;
-				// }
-			}
-		}
-		xhr.open("GET", "", true);
-		xhr.send();
+	    $http.get("http://localhost:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
+		  .then(function(response){ 
+			  console.log(response.data);
+			  
+			  $scope.name = response.data.name;
+			  $scope.desc = response.data.description;
+			  console.log($scope.name);
+			  
+//			  $scope.lanes = response.data.lanes;
+//			  $scope.stories = response.data.story;
+			 
+			  
+			  //This can iterate through content.  Not sure if best approach
+//			  angular.forEach(response.data, function(index){
+//				  //Gets data one by one
+//                  console.log(index);
+//                  
+//              });
+			  
+			  
+			  });
+	    
 	}
 
 	// EDIT AND TEST
 
-	function retrieveBoardInfo() {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				console.log(xhr.responseText);
-				// var boardDTO = JSON.parse(xhr.responseText);
-				// document.getElementById().innerHTML = boardDTO.name;
-				// //Correct these
-				// document.getElementById().innerHTML = boardDTO.description;
-			}
-		}
-		xhr.open("GET", "<!-- Add mapping-->", true);
-		xhr.send();
+	function updateBoard() {
+		console.log("updating board");
+		
+	    $http.put("http://localhost:8085/SOTE/rest/board/1")
+		  .then(function(response){ 
+			  console.log(response.data);
+			  });
 	}
 
 });
