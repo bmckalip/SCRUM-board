@@ -1,62 +1,77 @@
 package com.revature.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "board")
-public class Board implements Serializable {
+@Table(name="board")
+public class Board{
+
     @Id
-    @Column(name = "b_id")
-    private int id;
-    @Column(name = "b_title")
-    private String name;
+    @SequenceGenerator(name = "seq", sequenceName = "board_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @Column(name="b_id")
+    private int boardId;
+
+    @Column(name="b_title")
+    private String boardTitle;
+
     @Column(name = "b_desc")
-    private String description;
+    private String boardDescription;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
+        mappedBy = "board", orphanRemoval = true)
+    private List<Lane> lane = new ArrayList<>();
 
     public Board(){}
 
-
-    public Board(int id, String name, String description){
-        super();
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    public Board(String boardTitle, String boardDescription, List<Lane> lane) {
+        this.boardTitle = boardTitle;
+        this.boardDescription = boardDescription;
+        this.lane = lane;
     }
 
     @Override
     public String toString() {
         return "Board{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "boardId=" + boardId +
+                ", boardTitle='" + boardTitle + '\'' +
+                ", boardDescription='" + boardDescription + '\'' +
+//                ", lane=" + lane +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getBoardId() {
+        return boardId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
     }
 
-    public String getName() {
-        return name;
+    public String getBoardTitle() {
+        return boardTitle;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBoardTitle(String boardTitle) {
+        this.boardTitle = boardTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBoardDescription() {
+        return boardDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBoardDescription(String boardDescription) {
+        this.boardDescription = boardDescription;
+    }
+
+    public List<Lane> getLane() {
+        return lane;
+    }
+
+    public void setLane(List<Lane> lane) {
+        this.lane = lane;
     }
 }

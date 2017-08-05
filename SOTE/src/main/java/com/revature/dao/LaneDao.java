@@ -2,23 +2,17 @@ package com.revature.dao;
 
 import com.revature.pojo.Lane;
 
-/**
- * 
- * @author Joseph Nguyen
- *
- */
-
 public interface LaneDao {
 
-	//CREATE
-    public void createLane(Lane l);
-    
+    //CREATE
+    void createLane(Lane lane);
+
     //READ
-    public Lane getLaneById(Lane l);
-    
+    Lane getLaneById(Lane lane);
+
     //UPDATE
-    public void changeLaneName(Lane l);
-    
+    void updateLane(Lane lane);
+
     //DELETE
-    public void deleteLaneById(Lane l);
+    void deleteLane(Lane lane);
 }

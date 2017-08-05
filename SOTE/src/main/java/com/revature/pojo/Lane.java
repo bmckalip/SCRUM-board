@@ -1,58 +1,81 @@
 package com.revature.pojo;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="task")
-public class Lane implements Serializable{
-    @Id
-    @Column(name="l_id")
-    private int id;
-    @Column(name = "l_name")
-    private String name;
+@Table(name = "lane")
+public class Lane{
 
-    private Story story;
+    @Id
+    @SequenceGenerator(name = "seq", sequenceName = "lane_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
+    @Column (name = "l_id")
+    private int laneId;
+
+    @Column (name = "l_name", nullable = false)
+    private String laneName;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
+    mappedBy = "lane", orphanRemoval = true)
+    private List<Story> story = new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "B_ID")
+    private Board board;
 
     public Lane(){}
 
-    public Lane(int id, String name){
-        super();
-        this.id = id;
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @ManyToMany(mappedBy = "lane")
-    public Story getStory(){
-        return story;
-    }
-
-    public void setStory(Story story){
+    public Lane(String laneName, List<Story> story, Board board) {
+        this.laneName = laneName;
         this.story = story;
+        this.board = board;
     }
 
     @Override
     public String toString() {
         return "Lane{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", story=" + story +
+                "laneId=" + laneId +
+                ", laneName='" + laneName + '\'' +
+//                ", story=" + story +
+                ", board=" + board +
                 '}';
+    }
+
+    public int getLaneId() {
+        return laneId;
+    }
+
+    public void setLaneId(int laneId) {
+        this.laneId = laneId;
+    }
+
+    public String getLaneName() {
+        return laneName;
+    }
+
+    public void setLaneName(String laneName) {
+        this.laneName = laneName;
+    }
+
+    public List<Story> getStory() {
+        return story;
+    }
+
+    public void setStory(List<Story> story) {
+        this.story = story;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }

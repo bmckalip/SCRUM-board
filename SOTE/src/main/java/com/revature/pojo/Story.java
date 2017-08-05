@@ -1,120 +1,106 @@
 package com.revature.pojo;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "story")
-public class Story implements Serializable {
-
+public class Story{
     @Id
+    @SequenceGenerator(name = "seq", sequenceName = "story_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
     @Column(name = "s_id")
-    private int id;
-    @Column(name = "s_title")
-    private String name;
+    private int storyId;
+
+    @Column(name = "s_title", nullable = false)
+    private String storyTitle;
+
     @Column(name = "s_desc")
-    private String description;
-    @Column(name = "s_points")
-    private int points;
-    @Column(name = "l_id")
-    private int laneId;
-    @Column(name = "b_id")
-    private int boardId;
+    private String storyDescription;
 
-    public void setLane(Lane lane) {
-        this.lane = lane;
-    }
+    @Column(name = "s_points", nullable = false)
+    private int storyPoints;
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
+        mappedBy = "story", orphanRemoval = true)
+    private List<Task> task = new ArrayList<>();
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "L_ID")
     private Lane lane;
-    private Board board;
 
-    Story(){}
 
-    Story(int id, String name, String description, int points, int laneId, int boardId){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.points = points;
-        this.laneId = laneId;
-        this.boardId = boardId;
-    }
 
-    public int getId() {
-        return id;
-    }
+    public Story(){}
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public int getLaneId() {
-        return laneId;
-    }
-
-    public void setLaneId(int laneId) {
-        this.laneId = laneId;
-    }
-
-    public int getBoardId() {
-        return boardId;
+    public Story(String storyTitle, String storyDescription, int storyPoints, List<Task> task, Lane lane) {
+        this.storyTitle = storyTitle;
+        this.storyDescription = storyDescription;
+        this.storyPoints = storyPoints;
+        this.task = task;
+        this.lane = lane;
     }
 
     @Override
     public String toString() {
         return "Story{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", points=" + points +
-                ", laneId=" + laneId +
-                ", boardId=" + boardId +
-                ", lane=" + lane +
-                ", board=" + board +
+                "storyId=" + storyId +
+                ", storyTitle='" + storyTitle + '\'' +
+                ", storyDescription='" + storyDescription + '\'' +
+                ", storyPoints=" + storyPoints +
                 '}';
     }
 
-    public void setBoardId(int boardId) {
-        this.boardId = boardId;
+    public int getStoryId() {
+        return storyId;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "l_id")
-    public Lane getLane(){
+    public void setStoryId(int storyId) {
+        this.storyId = storyId;
+    }
+
+    public String getStoryTitle() {
+        return storyTitle;
+    }
+
+    public void setStoryTitle(String storyTitle) {
+        this.storyTitle = storyTitle;
+    }
+
+    public String getStoryDescription() {
+        return storyDescription;
+    }
+
+    public void setStoryDescription(String storyDescription) {
+        this.storyDescription = storyDescription;
+    }
+
+    public int getStoryPoints() {
+        return storyPoints;
+    }
+
+    public void setStoryPoints(int storyPoints) {
+        this.storyPoints = storyPoints;
+    }
+
+    public List<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(List<Task> task) {
+        this.task = task;
+    }
+
+    public Lane getLane() {
         return lane;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "b_id")
-    public Board getBoard(){
-        return board;
+    public void setLane(Lane lane) {
+        this.lane = lane;
     }
-
 }
