@@ -4,12 +4,17 @@ import com.revature.pojo.Board;
 
 public interface BoardDao {
 
-    //CREATE
-    void createBoard(Board board);
-    //READ
-    Board getBoardById(Board board);
-    //UPDATE
-    void updateBoard(Board board);
-    //DELETE
-    void deleteBoard(Board board);
+	//CREATE
+	public void createBoard(Board b);
+	
+	//READ
+    public Board getBoardById(Board board);
+	
+	//UPDATE
+	public void changeBoardName(Board b);
+	public Board updateBoard(Board board);
+	
+	//DELETE
+	public void deleteBoardById(Board b);
+	void deleteBoard(Board board);
 }

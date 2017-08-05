@@ -13,6 +13,18 @@ public class BoardDaoImpl implements BoardDao{
     @Autowired
     private SessionFactory sessionFactory;
 
+	@Override
+	public void changeBoardName(Board b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteBoardById(Board b) {
+		// TODO Auto-generated method stub
+		
+	}
+
     @Override
     public void createBoard(Board board) {
         System.out.println("Creating a board - FROM the BoardDaoImpl class");
@@ -26,13 +38,13 @@ public class BoardDaoImpl implements BoardDao{
         Session session = sessionFactory.getCurrentSession();
         return (Board) session.get(Board.class, board.getBoardId());
     }
-
-    @Override
-    public void updateBoard(Board board) {
-        System.out.println("Updating a board - FROM the BoardDaoImpl class");
-        Session session = sessionFactory.getCurrentSession();
-        session.update(board);
-    }
+    
+	@Override
+	public Board updateBoard(Board board) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(board);
+		return board;
+	}
 
     @Override
     public void deleteBoard(Board board) {
@@ -40,4 +52,5 @@ public class BoardDaoImpl implements BoardDao{
         Session session = sessionFactory.getCurrentSession();
         session.delete(board);
     }
+
 }

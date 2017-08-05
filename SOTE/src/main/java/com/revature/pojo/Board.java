@@ -39,7 +39,7 @@ public class Board{
                 "boardId=" + boardId +
                 ", boardTitle='" + boardTitle + '\'' +
                 ", boardDescription='" + boardDescription + '\'' +
-                ", lane=" + lane +
+//                ", lane=" + lane +
                 '}';
     }
 
