@@ -7,5 +7,7 @@ app.config(function($routeProvider){
 		.when('/home',   {	templateUrl: "static/features/homepage/homepage.html"	})
 		.when('/board',  {	templateUrl: "static/features/board/board.html"	  		})
 		.when('/logout', {	templateUrl: "static/features/login/login.html" 		})
-});
+}).config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
 

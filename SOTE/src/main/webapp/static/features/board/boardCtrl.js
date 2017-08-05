@@ -3,9 +3,8 @@
  * 
  */
 
-app.controller('boardCtrl', function() {
+app.controller('boardCtrl', function($http) {
 
-	 document.getElementById("addStory").addEventListener("click", openAddStoryModal);
 	 document.getElementById("addSwimLane").addEventListener("click", addALane);
 	 document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
 	 document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
@@ -50,35 +49,38 @@ app.controller('boardCtrl', function() {
 		var node = document.createElement("P");
 		var textnode = document.createTextNode(title.value);
 		var modal = document.getElementById('myModal');
+		var deleteStryBtn = document.createElement("BUTTON");		
+		
+		
+		deleteStryBtn.className += " " + "glyphicon glyphicon-remove";
+		deleteStryBtn.setAttribute('title', "Delete Story");
+		deleteStryBtn.id = "story" + i + "Btn";
 
 		node.appendChild(textnode);
 		node.className += " " + "row list-group-item ui-widget-content";
 		node.id = "story" + i;
 		node.draggable = "true";
+		
+		node.appendChild(deleteStryBtn);
+		
 		node.ondragstart = function drag(ev) {
 			ev.dataTransfer.setData("text", ev.target.id);
-
 		};
 		document.getElementById("swimlane1Content").appendChild(node);
+		
+		
+	    document.getElementById("story" + i + "Btn").addEventListener("click", function(e){
+	        removeStory(e);
+	    });
+		
 		i++;
 
 		title.value = "";
 		modal.style.display = "none";
-
-		// Old code to drag, couldnt get drop to work
-		// $( ".list-group-item" ).draggable();
+		
 	}
 
-	// Old code to drop---> didnt work
 
-	// $(".drop").droppable({ accept: ".list-group-item",
-	// drop: function(event, ui) {
-	// console.log("drop");
-	// var dropped = ui.draggable;
-	// var droppedOn = $(this);
-	// $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-	// }
-	// });
 
 	function allowDrop(ev) {
 		ev.preventDefault();
@@ -139,9 +141,20 @@ app.controller('boardCtrl', function() {
 	    panelDiv.appendChild(panelHeaderDiv);
 	    panelHeaderDiv.appendChild(panelHeaderP);
 	    panelHeaderP.appendChild(laneTitle);
+	    
+	    if(j == 1){
+	    	var addStoryBtn = document.createElement("BUTTON");
+	    	addStoryBtn.className += " " + "glyphicon glyphicon-book";
+	    	addStoryBtn.setAttribute('title', "Add Story");
+	    	addStoryBtn.id = "addStory";
+	    	panelHeaderDiv.appendChild(addStoryBtn);
+	    	
+	    }
+	    
 	    panelHeaderDiv.appendChild(deleteLaneBtn);
 	    
 	    panelDiv.appendChild(panelBodyDiv);
+	    
 	    
 	    panelBodyDiv.ondrop = function drop(ev) {
 	        ev.preventDefault();
@@ -164,16 +177,44 @@ app.controller('boardCtrl', function() {
 	        removeLane(e);
 	    });
 	    
+	 	document.getElementById("addStory").addEventListener("click", openAddStoryModal);
+
+	    
 	    j++;
 	}
 	
 	function removeLane(e){	    
 	    var target = e.target.parentNode.parentNode.parentNode;
 	    
+	    console.log(target.attributes.id);
+	    
 	    target.parentNode.removeChild(target);
+	    
+
+	    $http.get("http://localhost:8085/SOTE/rest/board/1")
+		  .then(function(response){ 
+			  console.log(response.data);
+			  });
+	    
+	    
 	    j--;
+	    
 	}
 
+	
+	
+	
+	function removeStory(e){
+		var target = e.target.parentNode;
+		
+		console.log(target.attributes.id);
+		
+		target.parentNode.removeChild(target);
+		i--;
+	}
+	
+	
+	
 	// Add code to update db with new info TEST AND EDIT
 
 	function updateLaneHead() {

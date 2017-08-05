@@ -28,6 +28,12 @@ p{
 
 .panel-title{
 	display:inline-block;
+	margin-right: 10px;
+}
+
+
+.list-group-item .glyphicon-remove{
+	right: 0px!important;
 }
 
 .panel {
