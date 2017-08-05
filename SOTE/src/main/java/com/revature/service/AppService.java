@@ -24,6 +24,12 @@ public class AppService {
 
     @Autowired
     private UserDao userDao;
+    
+    @Transactional
+	public Board updateBoard(int id, Board board) {
+		board.setBoardId(id);
+		return boardDao.updateBoard(board);
+	}
 
     @Autowired
     private BoardUserDao boardUserDao;
@@ -65,6 +71,5 @@ public class AppService {
     public Story getStoryById(Story story){return storyDao.getStoryById(story);}
 
     public BoardUser getBoardId(BoardUser boardUser){ return boardUserDao.getBoardUserByUserId(boardUser);}
-
 
 }

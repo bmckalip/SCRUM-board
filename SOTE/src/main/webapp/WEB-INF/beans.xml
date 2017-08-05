@@ -17,7 +17,6 @@
 			http://www.springframework.org/schema/tx 
 			http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-	<!-- Dillon you morons -->
 	<mvc:annotation-driven/>
 
 	<!-- enable autowiring -->
@@ -36,8 +35,8 @@
 	<bean id="myLocalDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="sote_db"></property>
-		<property name="password" value="123"></property>
+		<property name="username" value="scote_local"></property>
+		<property name="password" value="p4ssw0rd"></property>
 	</bean>
 
 	<!-- register the data source bean -->
@@ -53,7 +52,7 @@
 	<bean id="mySessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<!-- if testing with a local db, change this to the myLocalDataSource bean and vice versa -->
-		<property name="dataSource" ref="myAWSDataSource"></property>
+		<property name="dataSource" ref="myLocalDataSource"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect"> org.hibernate.dialect.Oracle10gDialect</prop>
