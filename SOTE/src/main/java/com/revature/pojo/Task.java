@@ -1,6 +1,17 @@
 package com.revature.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "task")
@@ -18,6 +29,7 @@ public class Task {
     @Column(name = "t_status", nullable = false)
     private int taskStatus;
 
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "S_ID")
     private Story story;
@@ -37,7 +49,7 @@ public class Task {
                 "taskId=" + taskId +
                 ", taskDescription='" + taskDescription + '\'' +
                 ", taskStatus=" + taskStatus +
-                ", story=" + story +
+//                ", story=" + story +
                 '}';
     }
 

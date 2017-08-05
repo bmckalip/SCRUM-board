@@ -1,6 +1,9 @@
 package com.revature.pojo;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class Lane{
     mappedBy = "lane", orphanRemoval = true)
     private List<Story> story = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "B_ID")
     private Board board;
@@ -38,7 +42,7 @@ public class Lane{
         return "Lane{" +
                 "laneId=" + laneId +
                 ", laneName='" + laneName + '\'' +
-                ", story=" + story +
+//                ", story=" + story +
                 ", board=" + board +
                 '}';
     }
