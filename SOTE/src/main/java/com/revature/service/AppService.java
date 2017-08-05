@@ -55,13 +55,17 @@ public class AppService {
     /**
      * @author Dillon Tuck
      */
+    @Transactional
 	public Board getBoardById(int id) {
 		
-//		Board userBoard = new Board();
-//		userBoard.setId(id);
-//		
-//		return boardDao.getBoardById(userBoard);
+		System.out.println("hitting AppService.getBoardByID(int {id})");
 		
-		return new Board(id, "Hardcoded Board", "This board is for test purposes");
+		Board userBoard = new Board();
+		userBoard.setId(id);
+		
+		System.out.println(userBoard);
+		
+		return boardDao.getBoardById(userBoard);
+		
 	}
 }
