@@ -27,6 +27,13 @@ public class BoardCtrl {
 	@Autowired
 	AppService service;
 	
+	/**
+	 * 
+	 * 
+	 * @author Dillon Tuck
+	 * @param board
+	 * @return
+	 */
 	@RequestMapping(value="/new", method=RequestMethod.POST)
 	public ResponseEntity<Board> newBoard(@RequestBody Board board){
 		System.out.println("hitting /board/new - POST");
