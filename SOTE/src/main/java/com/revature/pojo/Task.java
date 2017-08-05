@@ -1,85 +1,75 @@
 package com.revature.pojo;
 
-
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name="task")
-public class Task implements Serializable {
+@Table(name = "task")
+public class Task {
 
     @Id
-    @Column(name="t_id")
-    int id;
-    @Column(name = "t_desc")
-    String description;
-    @Column(name = "t_status")
-    int status;
-    @Column(name="s_id")
-    int storyId;
+    @SequenceGenerator(name = "seq", sequenceName = "task_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
+    @Column(name = "t_id")
+    private int taskId;
 
+    @Column(name = "t_desc", nullable = false)
+    private String taskDescription;
+
+    @Column(name = "t_status", nullable = false)
+    private int taskStatus;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "S_ID")
     private Story story;
 
-    public Task(){}
-
-    public Task(int id, String description, int status, int storyId){
-        super();
-        this.id = id;
-        this.description = description;
-        this.status = status;
-        this.storyId = storyId;
+    public Task() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getStoryId() {
-        return storyId;
-    }
-
-    public void setStoryId(int storyId) {
-        this.storyId = storyId;
-    }
-
-    @OneToMany(mappedBy = "board")
-    public Story getStory() {
-        return story;
+    public Task(String taskDescription, int taskStatus, Story story) {
+        this.taskDescription = taskDescription;
+        this.taskStatus = taskStatus;
+        this.story = story;
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", storyId=" + storyId +
+                "taskId=" + taskId +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", taskStatus=" + taskStatus +
                 ", story=" + story +
                 '}';
+    }
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+    public int getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(int taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    public Story getStory() {
+        return story;
     }
 
     public void setStory(Story story) {
         this.story = story;
     }
-
 }

@@ -69,7 +69,9 @@ public class BoardCtrl {
    @RequestMapping(value = "/{id}", method=RequestMethod.GET)
    public Board findOne(@PathVariable("id") int id) {
 	   System.out.println("hitting body/"+id+" controller");
-	   Board board = service.getBoardById(id);
+	   Board testBoard = new Board(); //ADDED
+	   testBoard.setBoardId(id); //ADDED
+	   Board board = service.getBoardById(testBoard); //MODIFIED
 	   System.out.println(board);
        return board;
    }

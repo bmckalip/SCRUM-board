@@ -7,12 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- * 
- * @author Joseph Nguyen
- *
- */
-
 @Repository
 public class TaskDaoImpl implements TaskDao{
 
@@ -20,32 +14,30 @@ public class TaskDaoImpl implements TaskDao{
     private SessionFactory sessionFactory;
 
     @Override
-    public void createTask(Task t) {
+    public void createTask(Task task) {
+        System.out.println("Creating a Task - FROM The TaskDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        session.save(t);
+        session.save(task);
+    }
+    @Override
+    public Task getTaskById(Task task) {
+        System.out.println("Retrieving a Task by ID - FROM The TaskDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        return (Task) session.get(Task.class, task.getTaskId());
     }
 
     @Override
-    public Task getTaskById(Task t) {
+    public void updateTask(Task task) {
+        System.out.println("Updating a Task by ID - FROM The TaskDaoImpl class");
         Session session = sessionFactory.getCurrentSession();
-        return (Task) session.get(Task.class, t.getId());
+        session.update(task);
     }
 
-	@Override
-	public void changeTaskDescription(Task t) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void deleteTask(Task task) {
+        System.out.println("Deleting a Task by ID - FROM The TaskDaoImpl class");
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(task);
 
-	@Override
-	public void changeTaskStatus(Task t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteTaskById(Task t) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 }
