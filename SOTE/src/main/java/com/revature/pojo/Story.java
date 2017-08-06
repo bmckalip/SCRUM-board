@@ -1,11 +1,24 @@
 package com.revature.pojo;
 
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "story")
@@ -25,11 +38,15 @@ public class Story{
     @Column(name = "s_points", nullable = false)
     private int storyPoints;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER,
         mappedBy = "story", orphanRemoval = true)
-    private List<Task> task = new ArrayList<>();
+    private Set<Task> task = new HashSet<>();
 
-    @JsonIgnore
+   
+
+	@JsonBackReference
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "L_ID")
     private Lane lane;
@@ -38,7 +55,7 @@ public class Story{
 
     public Story(){}
 
-    public Story(String storyTitle, String storyDescription, int storyPoints, List<Task> task, Lane lane) {
+    public Story(String storyTitle, String storyDescription, int storyPoints, Set<Task> task, Lane lane) {
         this.storyTitle = storyTitle;
         this.storyDescription = storyDescription;
         this.storyPoints = storyPoints;
@@ -53,6 +70,7 @@ public class Story{
                 ", storyTitle='" + storyTitle + '\'' +
                 ", storyDescription='" + storyDescription + '\'' +
                 ", storyPoints=" + storyPoints +
+                ", task=" + task +
                 '}';
     }
 
@@ -88,14 +106,15 @@ public class Story{
         this.storyPoints = storyPoints;
     }
 
-    public List<Task> getTask() {
+    public Set<Task> getTask() {
         return task;
     }
 
-    public void setTask(List<Task> task) {
+    public void setTask(Set<Task> task) {
         this.task = task;
     }
 
+    @JsonIgnore
     public Lane getLane() {
         return lane;
     }
@@ -103,4 +122,31 @@ public class Story{
     public void setLane(Lane lane) {
         this.lane = lane;
     }
+    
+    public void addTask(Task t){
+    	this.task.add(t);
+    	t.setStory(this);
+    }
+    
+    @Override
+   	public int hashCode() {
+   		final int prime = 31;
+   		int result = 1;
+   		result = prime * result + storyId;
+   		return result;
+   	}
+
+   	@Override
+   	public boolean equals(Object obj) {
+   		if (this == obj)
+   			return true;
+   		if (obj == null)
+   			return false;
+   		if (getClass() != obj.getClass())
+   			return false;
+   		Story other = (Story) obj;
+   		if (storyId != other.storyId)
+   			return false;
+   		return true;
+   	}
 }
