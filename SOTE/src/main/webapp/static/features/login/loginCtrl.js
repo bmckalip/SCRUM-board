@@ -3,6 +3,7 @@
  * 
  * for module:
  * 		scrumBoard
+ * @author Adeo, Brian
  */
 
 
