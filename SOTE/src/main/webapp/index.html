@@ -28,14 +28,17 @@
 			crossorigin="anonymous"></script>
 		
 		<!-- cssStrap - local css overriding bootstrap -->		
-		<link rel="stylesheet" href="static/features/board/board.css" type="text/css" />
+		<!-- <link rel="stylesheet" href="static/features/board/board.css" type="text/css" /> -->
 		
 		<!-- login styling -->
-		<link rel="stylesheet" href="static/features/login/login.css" type="text/css" />
+		<!-- <link rel="stylesheet" href="static/features/login/login.css" type="text/css" /> -->
+		
+		<!-- Overriding CSS -->
+		<link rel="stylesheet" href="static/resources/css/style.css" type="text/css" />
 
 	</head>
 	
-	<body data-ng-app="scrumBoard">
+	<body id="indexBody" data-ng-app="scrumBoard">
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -56,9 +59,10 @@
 						<li><a href="#!board">Board</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#!logout">Logout</a></li>
+						<li><a href="logout" ><span class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
+			</div>
 				<!-- /.navbar-collapse -->
 		</nav>
 

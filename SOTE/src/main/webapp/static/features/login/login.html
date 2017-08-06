@@ -1,3 +1,4 @@
+<!-- ORIGINAL LOGIN
 <div class="container" ng-controller="loginCtrl">
 
 	<div id="login-body">
@@ -9,12 +10,41 @@
 			<label for="loginPassword">Password</label>
 				<input id="loginPassword" class="form-control" type="text" ng-model="data.password" /> 
 			
-			<button class="btn btn-primary form-control" id="subit-login" ng-click="submitLogin">Login</button>
+			<button class="btn btn-primary form-control" id="submit-login" ng-click="submitLogin">Login</button>
 		</div>
 	</div>
 	
 	
 
+	logging
+	<h1>{{data.email}}</h1>
+	<h1>{{data.password}}</h1>
+</div> -->
+
+<div id="SOTELoginBackground" class="container" ng-controller="loginCtrl">
+	<form class = "form-horizontal" id = "submit" method = "POST" action = "login"> 
+		<div class="loginimgcontainer">
+			<img class="uglylogo" src="static/resources/uglylogo.jpg">
+		</div>
+		<div class="form-group"> 
+			<label for="inputEmail" class="col-sm-2 col-sm-offset-1 control-label">Email: </label>
+			<div class="col-sm-7">
+				<input type="email" class="form-control" id="loginEmail" placeholder="Email" name = "email" ng-model="data.email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">Password: </label>
+			<div class="col-sm-7">
+				<input type="password" class="form-control" id="loginPassword" placeholder="Password" name = "password" ng-model="data.password">
+			</div>
+		</div>
+		<div class="form-group">
+			<div id="centersubmit">
+				<button class="btn btn-info form-control" id="submit-login" ng-click="submitLogin">Login</button>
+			</div>
+		</div>
+	</form>
+	
 	<!-- logging -->
 	<h1>{{data.email}}</h1>
 	<h1>{{data.password}}</h1>

@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import com.revature.dao.*;
+import com.revature.dao.impl.UserDaoImpl;
 import com.revature.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,45 @@ public class AppService {
 		board.setBoardId(id);
 		return boardDao.updateBoard(board);
 	}
+    
+    @Transactional
+    public User getUserById(int id){
+    	System.out.println("hit AppService.getUserById(int{id})");
+    	User user = new User();
+    	user.setUserId(id);
+    	System.out.println(user);
+    	return userDao.getUserById(user);
+    }
+    
+   
+
+    
+
+//        	public User authenticateUser(User user){
+//
+//        		UserDao dao = new UserDaoImpl();
+//
+//        		User TrUser = dao.getUserByEmail(user);
+//
+//        		
+//
+//        		if(TrUser != null && TrUser.getUserEmail().equals(user.getUserEmail())
+//
+//        				&& TrUser.getUserPassword().equals(user.getUserPassword())){
+//
+//        			return TrUser;
+//
+//        		}
+//
+//    			return user;
+//
+//        		
+//
+//        		
+//
+//        	}
+
+        
 
     @Autowired
     private BoardUserDao boardUserDao;

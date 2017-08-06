@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+
+/* css for login.html */
+img.uglylogo {
+	padding-left: 25%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+body {
+	background-image: url(http://www.magic4walls.com/wp-content/uploads/2014/02/shapes-visualization-cubes-abstraction-figures.jpg);
+}
+
+#loginEmail, #loginPassword {
+	border: 3px solid #00BCD4;
+    opacity: 0.9;
+}
+
+#submit-login {
+	width: 30%;
+    margin-left: 35%;
+}
+
+
+/* css for navbar (which is in the index.html???) */
