@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,5 +81,16 @@ public class BoardCtrl {
 	   testBoard.setBoardId(id); //ADDED
 	   Board board = service.getBoardById(testBoard); //MODIFIED
        return board;
+   }
+   
+   /**
+    * Gets all boards
+    * 
+    * @author Dillon Tuck
+    */
+   @RequestMapping(value= "/all", method=RequestMethod.GET)
+   public Set<Board> findAll(){
+	   System.out.println("hitting the get all boards controller");
+	   return service.getAllBoards();
    }
 }
