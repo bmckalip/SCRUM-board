@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "task")
 public class Task {
 
-    @Id
+	@Id
     @SequenceGenerator(name = "seq", sequenceName = "task_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
     @Column(name = "t_id")
@@ -86,5 +86,27 @@ public class Task {
     public void setStory(Story story) {
         this.story = story;
     }
+    
+    @Override
+  	public int hashCode() {
+  		final int prime = 31;
+  		int result = 1;
+  		result = prime * result + taskId;
+  		return result;
+  	}
+
+  	@Override
+  	public boolean equals(Object obj) {
+  		if (this == obj)
+  			return true;
+  		if (obj == null)
+  			return false;
+  		if (getClass() != obj.getClass())
+  			return false;
+  		Task other = (Task) obj;
+  		if (taskId != other.taskId)
+  			return false;
+  		return true;
+  	}
     
 }

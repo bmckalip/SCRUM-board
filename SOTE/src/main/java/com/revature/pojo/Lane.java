@@ -1,7 +1,7 @@
 package com.revature.pojo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,11 +34,33 @@ public class Lane{
     private String laneName;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
+    @OneToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER,
     mappedBy = "lane", orphanRemoval = true)
-    private List<Story> story = new ArrayList<>();
+    private Set<Story> story = new HashSet<>();
 
-    @JsonBackReference
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + laneId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Lane other = (Lane) obj;
+		if (laneId != other.laneId)
+			return false;
+		return true;
+	}
+
+	@JsonBackReference
 //    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "b_id")
@@ -46,7 +68,7 @@ public class Lane{
 
     public Lane(){}
 
-    public Lane(String laneName, List<Story> story, Board board) {
+    public Lane(String laneName, Set<Story> story, Board board) {
         this.laneName = laneName;
         this.story = story;
         this.board = board;
@@ -77,11 +99,11 @@ public class Lane{
         this.laneName = laneName;
     }
 
-    public List<Story> getStory() {
+    public Set<Story> getStory() {
         return story;
     }
 
-    public void setStory(List<Story> story) {
+    public void setStory(Set<Story> story) {
         this.story = story;
     }
 
