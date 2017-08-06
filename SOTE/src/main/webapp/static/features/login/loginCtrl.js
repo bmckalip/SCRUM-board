@@ -6,14 +6,14 @@
  */
 
 
-	app.controller('loginCtrl', function($scope){
+	app.controller('loginCtrl', function($scope, $http, $rootscope){
 		$scope.data = {
 				email : "",
 				password : ""
 		};
 		
 		$scope.loginSubmit = function(){
-			
+
 		}
 	})	
 
