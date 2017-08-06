@@ -7,5 +7,6 @@ app.config(function($routeProvider){
 		.when('/home',   {	templateUrl: "static/features/homepage/homepage.html"	})
 		.when('/board',  {	templateUrl: "static/features/board/board.html"	  		})
 		.when('/logout', {	templateUrl: "static/features/login/login.html" 		})
+		.when('/login', {	templateUrl: "static/features/login/login.html" 		})
 });
 
