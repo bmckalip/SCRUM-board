@@ -2,7 +2,9 @@ package com.revature.pojo;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,13 @@ public class Story{
     @Column(name = "s_points", nullable = false)
     private int storyPoints;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
         mappedBy = "story", orphanRemoval = true)
     private List<Task> task = new ArrayList<>();
 
-    @JsonIgnore
+    @JsonBackReference
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "L_ID")
     private Lane lane;
@@ -53,6 +57,7 @@ public class Story{
                 ", storyTitle='" + storyTitle + '\'' +
                 ", storyDescription='" + storyDescription + '\'' +
                 ", storyPoints=" + storyPoints +
+                ", task=" + task +
                 '}';
     }
 
@@ -96,11 +101,17 @@ public class Story{
         this.task = task;
     }
 
+    @JsonIgnore
     public Lane getLane() {
         return lane;
     }
 
     public void setLane(Lane lane) {
         this.lane = lane;
+    }
+    
+    public void addTask(Task t){
+    	this.task.add(t);
+    	t.setStory(this);
     }
 }

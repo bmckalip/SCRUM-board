@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -29,7 +30,8 @@ public class Task {
     @Column(name = "t_status", nullable = false)
     private int taskStatus;
 
-    @JsonIgnore
+    @JsonBackReference
+//    @JsonIgnore
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "S_ID")
     private Story story;
@@ -49,7 +51,6 @@ public class Task {
                 "taskId=" + taskId +
                 ", taskDescription='" + taskDescription + '\'' +
                 ", taskStatus=" + taskStatus +
-//                ", story=" + story +
                 '}';
     }
 
@@ -76,7 +77,8 @@ public class Task {
     public void setTaskStatus(int taskStatus) {
         this.taskStatus = taskStatus;
     }
-
+    
+    @JsonIgnore
     public Story getStory() {
         return story;
     }
@@ -84,4 +86,5 @@ public class Task {
     public void setStory(Story story) {
         this.story = story;
     }
+    
 }

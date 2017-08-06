@@ -27,7 +27,23 @@ public class AppService {
     
     @Transactional
 	public Board updateBoard(int id, Board board) {
+//    	
+//    	board.setBoardId(id);
+//    	
+//    	for(Lane l : board.getLane()){
+//    		board.addLane(l);
+//    		for(Story s: l.getStory()){
+//    			l.addStory(s);
+//    			for(Task t: s.getTask()){
+//    				s.addTask(t);
+//    			}
+//    		}
+//    	}
+    	
+    	
+		System.out.println("board in service layer before dao: "+ board);
 		board.setBoardId(id);
+		System.out.println("board in service layer after dao: "+ board);
 		return boardDao.updateBoard(board);
 	}
 

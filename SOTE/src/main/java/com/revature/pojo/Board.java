@@ -1,9 +1,20 @@
 package com.revature.pojo;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="board")
@@ -21,6 +32,7 @@ public class Board{
     @Column(name = "b_desc")
     private String boardDescription;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
         mappedBy = "board", orphanRemoval = true)
     private List<Lane> lane = new ArrayList<>();
@@ -39,7 +51,7 @@ public class Board{
                 "boardId=" + boardId +
                 ", boardTitle='" + boardTitle + '\'' +
                 ", boardDescription='" + boardDescription + '\'' +
-//                ", lane=" + lane +
+                ", lane=" + lane +
                 '}';
     }
 
@@ -73,5 +85,10 @@ public class Board{
 
     public void setLane(List<Lane> lane) {
         this.lane = lane;
+    } 
+    
+    public void addLane(Lane l){
+    	this.lane.add(l);
+    	l.setBoard(this);
     }
 }

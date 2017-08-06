@@ -57,7 +57,10 @@ public class BoardCtrl {
    @RequestMapping(value = "/{id}", method=RequestMethod.PUT)
    public Board findOne(@PathVariable("id") int id, @RequestBody Board board) {
 	   System.out.println("hitting board/"+id+" controller - PUT");
+	   System.out.println("board before update:" + board);
 	   board = service.updateBoard(id, board);
+	   
+	   System.out.println("board after update:" + board);
 	   
        return board;
    }

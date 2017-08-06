@@ -41,8 +41,10 @@ public class BoardDaoImpl implements BoardDao{
     
 	@Override
 	public Board updateBoard(Board board) {
+		System.out.println("board in dao layer before update: "+ board);
 		Session session = sessionFactory.getCurrentSession();
 		session.update(board);
+		System.out.println("board in dao layer after update: "+ board);
 		return board;
 	}
 
