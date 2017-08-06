@@ -27,6 +27,11 @@ p{
 }
 
 
+#updateBoard{
+	position: absolute!important;
+	right: 3%!important;
+}
+
 .panel-title{
 	display:inline-block;
 	margin-right: 10px;

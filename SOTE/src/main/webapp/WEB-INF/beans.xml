@@ -52,7 +52,7 @@
 	<bean id="mySessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<!-- if testing with a local db, change this to the myLocalDataSource bean and vice versa -->
-		<property name="dataSource" ref="myLocalDataSource"></property>
+		<property name="dataSource" ref="myAWSDataSource"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect"> org.hibernate.dialect.Oracle10gDialect</prop>

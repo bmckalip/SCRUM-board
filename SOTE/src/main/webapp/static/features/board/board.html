@@ -1,6 +1,5 @@
 
 <div id="bodyClass" data-ng-controller="boardCtrl as board">
-	<h1>This is the board page</h1>
 	
 	
 	<!-- This is to display a modal for adding a story -->
@@ -14,8 +13,8 @@
 		</div>
 	</div>
 
-	<h2 id="boardTitle" contenteditable="true" ng-model="boardTitle"> {{ name }}</h2>
-	<h4 id="boardDesc" contenteditable="true" ng-model="boardDesc"> {{ desc }}</h4>
+	<h2 id="boardTitle" contenteditable="true" ng-model="boardTitle"> {{ board.boardTitle }}</h2>
+	<h4 id="boardDesc" contenteditable="true" ng-model="boardDesc"> {{ board.boardDescription }}</h4>
 	<button type="button" class="glyphicon glyphicon-road" title="Add a Swimlane" id="addSwimLane"></button>
 	<button type="button" title="Burndown Chart" id="openBurnDown">Burndown Chart</button>
 	<br>
@@ -23,7 +22,7 @@
 
 
 	<div>
-		<button type="button" title="Save Changes" id="updateBoard">Save Changes</button>
+		<button type="button" title="Save Changes" id="updateBoard">Save Changes</button><br><br>
 	</div>
 		
 	

@@ -44,12 +44,11 @@ app.controller('boardCtrl', function($http,$scope) {
 
 	// Function to add a story
 	var i = 1;
-	function addAStory() {
+	function addAStory(lane, story) {
 
 		var title = document.getElementById("storyTitle");
 
 		var node = document.createElement("P");
-		var textnode = document.createTextNode(title.value);
 		var modal = document.getElementById('myModal');
 		var deleteStryBtn = document.createElement("BUTTON");		
 		
@@ -58,6 +57,32 @@ app.controller('boardCtrl', function($http,$scope) {
 		deleteStryBtn.setAttribute('title', "Delete Story");
 		deleteStryBtn.id = "story" + i + "Btn";
 
+		console.log(lane);
+		if(lane && lane.story){
+			console.log("teeh" +lane.story[story].storyTitle);
+			
+	    	var textnode = document.createTextNode(lane.story[story].storyTitle);
+	    	node.classList.add(story);
+	    	
+	    } else if(!lane || !lane.story){
+	    	var textnode = document.createTextNode(title.value);
+	    	node.classList.add( i - 1 );
+//	    	
+//	     	lane.story = [];
+//	    	$scope.addToStoryList = {};
+//	    	
+//	    	$scope.addToStoryList = {
+//	    			"storyId": i ,
+//	    	        "storyTitle": textnode,
+//	    	        "storyDescription":"Test2 Description",
+//	    	        "storyPoints":5,
+//	    	      };
+//	        lane.story.push($scope.addToStoryList);
+//	        console.log()
+	    	
+	    }
+		
+		
 		node.appendChild(textnode);
 		node.className += " " + "row list-group-item ui-widget-content";
 		node.id = "story" + i;
@@ -92,7 +117,7 @@ app.controller('boardCtrl', function($http,$scope) {
 	
 	//Code to add a Lane
 	var j = 1;
-	function addALane(){    
+	function addALane(lane){    
 	    console.log("adding a lane - " + j)
 	    
 	    //Give the divs attributes classes and ids
@@ -124,8 +149,18 @@ app.controller('boardCtrl', function($http,$scope) {
 	    panelBodyDiv.className += " " + "panel-body list-group";
 	    panelBodyDiv.id = "swimlane" + j + "Content";
 	    
+	    
+	    
 	    //Creates Title of the Lane
-	    var laneTitle = document.createTextNode("Default Title"); 
+	    if(lane.laneId){
+	    	var laneTitle = document.createTextNode(lane.laneName); 
+	    	
+	    	console.log("blah blah blah");
+	    	console.log(lane.laneId);
+	    } else{
+	    	var laneTitle = document.createTextNode("Default Title"); 
+	    }
+
 	    
 	    
 	    //Add divs to the page
@@ -179,7 +214,7 @@ app.controller('boardCtrl', function($http,$scope) {
 	
 	
 	
-	//Removes a lane from a board			===   CHANGE TO DELETE
+	//Removes a lane from a board
 	function removeLane(e){	    
 	    var target = e.target.parentNode.parentNode.parentNode;
 	    
@@ -193,7 +228,7 @@ app.controller('boardCtrl', function($http,$scope) {
 	}
 
 	
-	//Removes a story from the lane			===   CHANGE TO DELETE
+	//Removes a story from the lane
 	
 	function removeStory(e){
 		var target = e.target.parentNode;
@@ -241,22 +276,20 @@ app.controller('boardCtrl', function($http,$scope) {
 
 	    $http.get("http://localhost:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
 		  .then(function(response){ 
-			  console.log(response.data);
 			  
-			  $scope.name = response.data.name;
-			  $scope.desc = response.data.description;
-			  console.log($scope.name);
+			  $scope.board = response.data;
 			  
-//			  $scope.lanes = response.data.lanes;
-//			  $scope.stories = response.data.story;
+			  
+			  for(lane in $scope.board.lane){
+				  				  
+				  addALane($scope.board.lane[lane]);
+				  
+				  for(story in $scope.board.lane[lane].story){
+						addAStory($scope.board.lane[lane], story);
+					  }
+				  
+			  }
 			 
-			  
-			  //This can iterate through content.  Not sure if best approach
-//			  angular.forEach(response.data, function(index){
-//				  //Gets data one by one
-//                  console.log(index);
-//                  
-//              });
 			  
 			  
 			  });
