@@ -26,8 +26,20 @@ p{
 	right: 3%;
 }
 
+
+#updateBoard{
+	position: absolute!important;
+	right: 3%!important;
+}
+
 .panel-title{
 	display:inline-block;
+	margin-right: 10px;
+}
+
+
+.list-group-item .glyphicon-remove{
+	right: 0px!important;
 }
 
 .panel {

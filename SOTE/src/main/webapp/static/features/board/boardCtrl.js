@@ -3,17 +3,18 @@
  * 
  */
 
-app.controller('boardCtrl', function() {
+app.controller('boardCtrl', function($http,$scope) {
 
-	 document.getElementById("addStory").addEventListener("click", openAddStoryModal);
+	retrieveBoard(); 		//Retrieves json containing board information
+	
+	
 	 document.getElementById("addSwimLane").addEventListener("click", addALane);
 	 document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
 	 document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
-		
-	 //Make the header dynamic
-	 //document.getElementById("lane1header").addEventListener("blur", updateLaneHead);
+//	 document.getElementById("openBurnDown").addEventListener("click", openBurndownChart/*?*/);
+	 document.getElementById("updateBoard").addEventListener("click",updateBoard);
 
-	// Add click event to story titles to open modal
+	// Add click event to story titles to open modal to add stories
 	function openAddStoryModal() {
 		// Get the modal
 		var modal = document.getElementById('myModal');
@@ -43,62 +44,80 @@ app.controller('boardCtrl', function() {
 
 	// Function to add a story
 	var i = 1;
-	function addAStory() {
+	function addAStory(lane, story) {
 
 		var title = document.getElementById("storyTitle");
 
 		var node = document.createElement("P");
-		var textnode = document.createTextNode(title.value);
 		var modal = document.getElementById('myModal');
+		var deleteStryBtn = document.createElement("BUTTON");		
+		
+		
+		deleteStryBtn.className += " " + "glyphicon glyphicon-remove";
+		deleteStryBtn.setAttribute('title', "Delete Story");
+		deleteStryBtn.id = "story" + i + "Btn";
 
+		console.log(lane);
+		if(lane && lane.story){
+			console.log("teeh" +lane.story[story].storyTitle);
+			
+	    	var textnode = document.createTextNode(lane.story[story].storyTitle);
+	    	node.classList.add(story);
+	    	
+	    } else if(!lane || !lane.story){
+	    	var textnode = document.createTextNode(title.value);
+	    	node.classList.add( i - 1 );
+//	    	
+//	     	lane.story = [];
+//	    	$scope.addToStoryList = {};
+//	    	
+//	    	$scope.addToStoryList = {
+//	    			"storyId": i ,
+//	    	        "storyTitle": textnode,
+//	    	        "storyDescription":"Test2 Description",
+//	    	        "storyPoints":5,
+//	    	      };
+//	        lane.story.push($scope.addToStoryList);
+//	        console.log()
+	    	
+	    }
+		
+		
 		node.appendChild(textnode);
 		node.className += " " + "row list-group-item ui-widget-content";
 		node.id = "story" + i;
 		node.draggable = "true";
+		
+		node.appendChild(deleteStryBtn);
+		
 		node.ondragstart = function drag(ev) {
 			ev.dataTransfer.setData("text", ev.target.id);
-
 		};
 		document.getElementById("swimlane1Content").appendChild(node);
+		
+		//Add the function to open the view story modal here
+		document.getElementById("story" + i).addEventListener("click", console.log("add story event listener"));
+
+		
+	    document.getElementById("story" + i + "Btn").addEventListener("click", function(e){
+	        removeStory(e);
+	    });
+	    
+
+		
 		i++;
 
 		title.value = "";
 		modal.style.display = "none";
-
-		// Old code to drag, couldnt get drop to work
-		// $( ".list-group-item" ).draggable();
+		
 	}
 
-	// Old code to drop---> didnt work
 
-	// $(".drop").droppable({ accept: ".list-group-item",
-	// drop: function(event, ui) {
-	// console.log("drop");
-	// var dropped = ui.draggable;
-	// var droppedOn = $(this);
-	// $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
-	// }
-	// });
 
-	function allowDrop(ev) {
-		ev.preventDefault();
-		if (ev.target.getAttribute("draggable") == "true")
-			ev.dataTransfer.dropEffect = "none"; // dropping is not allowed
-		else
-			ev.dataTransfer.dropEffect = "all"; // drop it like it's hot
-	}
-	;
-
-	function drop(ev) {
-		ev.preventDefault();
-		var data = ev.dataTransfer.getData("text");
-
-		ev.target.appendChild(document.getElementById(data));
-	}
-	;
-
+	
+	//Code to add a Lane
 	var j = 1;
-	function addALane(){    
+	function addALane(lane){    
 	    console.log("adding a lane - " + j)
 	    
 	    //Give the divs attributes classes and ids
@@ -130,8 +149,18 @@ app.controller('boardCtrl', function() {
 	    panelBodyDiv.className += " " + "panel-body list-group";
 	    panelBodyDiv.id = "swimlane" + j + "Content";
 	    
+	    
+	    
 	    //Creates Title of the Lane
-	    var laneTitle = document.createTextNode("Default Title"); 
+	    if(lane.laneId){
+	    	var laneTitle = document.createTextNode(lane.laneName); 
+	    	
+	    	console.log("blah blah blah");
+	    	console.log(lane.laneId);
+	    } else{
+	    	var laneTitle = document.createTextNode("Default Title"); 
+	    }
+
 	    
 	    
 	    //Add divs to the page
@@ -139,15 +168,28 @@ app.controller('boardCtrl', function() {
 	    panelDiv.appendChild(panelHeaderDiv);
 	    panelHeaderDiv.appendChild(panelHeaderP);
 	    panelHeaderP.appendChild(laneTitle);
+	    
+	    if(j == 1){
+	    	var addStoryBtn = document.createElement("BUTTON");
+	    	addStoryBtn.className += " " + "glyphicon glyphicon-book";
+	    	addStoryBtn.setAttribute('title', "Add Story");
+	    	addStoryBtn.id = "addStory";
+	    	panelHeaderDiv.appendChild(addStoryBtn);
+	    	
+	    }
+	    
 	    panelHeaderDiv.appendChild(deleteLaneBtn);
 	    
 	    panelDiv.appendChild(panelBodyDiv);
+	    
 	    
 	    panelBodyDiv.ondrop = function drop(ev) {
 	        ev.preventDefault();
 	        var data = ev.dataTransfer.getData("text");
 	        
 	        ev.target.appendChild(document.getElementById(data));
+	        
+	        
 	    };
 	    
 	    panelBodyDiv.ondragover = function allowDrop(ev) {
@@ -164,88 +206,105 @@ app.controller('boardCtrl', function() {
 	        removeLane(e);
 	    });
 	    
+	 	document.getElementById("addStory").addEventListener("click", openAddStoryModal);
+	 	
+	    
 	    j++;
 	}
 	
+	
+	
+	//Removes a lane from a board
 	function removeLane(e){	    
 	    var target = e.target.parentNode.parentNode.parentNode;
 	    
+	    console.log(target.attributes.id);
+	    
 	    target.parentNode.removeChild(target);
+	    
+	    
 	    j--;
+	    
 	}
 
-	// Add code to update db with new info TEST AND EDIT
-
+	
+	//Removes a story from the lane
+	
+	function removeStory(e){
+		var target = e.target.parentNode;
+		
+		console.log(target.attributes.id);
+		
+		target.parentNode.removeChild(target);
+		
+		
+		i--;
+	}
+	
+	
+	
+//Edits a lanes header 
 	function updateLaneHead() {
 
 		// add code to submit edited title into db
 		console.log("Editing Lane Header");
 
-		// This needs editing
-		// var xhr = new XMLHttpRequest();
-		//	
-		// xhr.onreadystatechange = function(){
-		// if(xhr.readyState == 4 && xhr.status == 200){
-		// console.log("Edit lane header info loaded")
-		// }
-		// }
-		// xhr.open("POST",'/lane/rename', true);
-		//	
-		// xhr.send();
-
 	}
 
+	
+	//Find endpoints for this
+	//Edits a board title
 	function updateBoardTitle() {
 
-		// add code to submit edited title into db
 		console.log("Editing Board Title");
+		
 	}
 
+	
+	//updates a board description
 	function updateBoardDesc() {
-		// add code to submit edited desc into db
-		console.log("Editing Board Description!")
+		console.log("Editing Board Description!");
+		
+		
 	}
 
-	// Add code to pull story and board info to db -----EDIT/TEST
+	
+	
+	//Below code can be used to populate page
 
-	function retrieveStoryInfo() {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			j = 1;
+	function retrieveBoard() {
 
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				console.log(xhr.responseText);
-				// var storyDTO = JSON.parse(xhr.responseText);
-				//				
-				// //Find way to loop through stories in db and add content to
-				// page
-				//				
-				// if(storyDTO.id != null ){
-				// document.getElementById('story' + j).innerHTML =
-				// storyDTO.name;
-				// j++;
-				// }
-			}
-		}
-		xhr.open("GET", "", true);
-		xhr.send();
+	    $http.get("http://localhost:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
+		  .then(function(response){ 
+			  
+			  $scope.board = response.data;
+			  
+			  
+			  for(lane in $scope.board.lane){
+				  				  
+				  addALane($scope.board.lane[lane]);
+				  
+				  for(story in $scope.board.lane[lane].story){
+						addAStory($scope.board.lane[lane], story);
+					  }
+				  
+			  }
+			 
+			  
+			  
+			  });
+	    
 	}
 
 	// EDIT AND TEST
 
-	function retrieveBoardInfo() {
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				console.log(xhr.responseText);
-				// var boardDTO = JSON.parse(xhr.responseText);
-				// document.getElementById().innerHTML = boardDTO.name;
-				// //Correct these
-				// document.getElementById().innerHTML = boardDTO.description;
-			}
-		}
-		xhr.open("GET", "<!-- Add mapping-->", true);
-		xhr.send();
+	function updateBoard() {
+		console.log("updating board");
+		
+	    $http.put("http://localhost:8085/SOTE/rest/board/1")
+		  .then(function(response){ 
+			  console.log(response.data);
+			  });
 	}
 
 });
