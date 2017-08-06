@@ -6,30 +6,35 @@
  */
 
 
-	app.controller('loginCtrl', function($scope, $http, $rootScope){
+	app.controller('loginCtrl', function($scope, $http, $rootScope, $location){
+		$rootScope.user = null;
+		
 		$scope.data = {
 				email : "",
 				password : ""
 		};
-		$scope.loginSubmit = function(){
-			console.log('testing')
-
-//			var url="http://localhost:8085/SOTE/rest/login";
-//			var user= 
-//			{
-//				    "userId": null,
-//				    "userEmail": $scope.data.email,
-//				    "userPassword": $scope.data.password,
-//				    "permission": null,
-//				    "userFirstName": null,
-//				    "userLastName": null
-//				}
-//			var parameter = JSON.stringify(user);
-//				$http.post(url, parameter).
-//				success(function(data, status, headers, config) { //valid
-//					console.log(data);
-//				}). error(function(data, status, headers, config) {invalid });	
-
+		
+		$scope.submitLogin = function(){
+			var url ="http://localhost:8085/SOTE/rest/login";
+			var user = {
+				    "userEmail": $scope.data.email,
+				    "userPassword": $scope.data.password,
+			}
+			
+			var parameter = JSON.stringify(user);
+				$http.post(url, parameter)
+				.then(
+					function(response){
+						console.log(response.data);
+						$rootScope.user = response.data;
+						$location.path('/homepage')
+					},
+					
+					function(response){
+						console.log(response.data);
+						$rootScope.user = null;
+					}
+				);
 		}
-	})	;
+	});
 
