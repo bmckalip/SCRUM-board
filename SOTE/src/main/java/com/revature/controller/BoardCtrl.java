@@ -18,8 +18,6 @@ import com.revature.service.AppService;
  * @author Brian McKalip
  *
  */
-
-
 @RestController
 @RequestMapping("/board")
 public class BoardCtrl {
@@ -42,22 +40,24 @@ public class BoardCtrl {
 	
 		return new ResponseEntity<Board>(HttpStatus.OK);
 	}
-//	
-//	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
-//	public ResponseEntity<Board> deleteBoard(@RequestParam("id") int id){
-//		//TODO: call service method to delete board
-//		return new ResponseEntity<Board>(HttpStatus.OK);
-//	}
+
+	/**
+	 * Currently not implemented
+	 */
+	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
+	public ResponseEntity<Board> deleteBoard(@RequestParam("id") int id){
+		//TODO: call service method to delete board
+		return new ResponseEntity<Board>(HttpStatus.NOT_IMPLEMENTED);
+	}
 	
 	/**
-	 * @author Dillon Tuck
+	 * Only updates the board description, board name and board id
+	 * not the lanes, stories or tasks
 	 * 
-	 * incomplete
+	 * @author Dillon Tuck
 	 */
    @RequestMapping(value = "/{id}", method=RequestMethod.PUT)
    public Board findOne(@PathVariable("id") int id, @RequestBody Board board) {
-	   System.out.println("hitting board/"+id+" controller - PUT");
-	   System.out.println("board before update:" + board);
 	   board = service.updateBoard(id, board);
 	   
 	   System.out.println("board after update:" + board);
@@ -66,16 +66,18 @@ public class BoardCtrl {
    }
 	
 	/**
+	 * Gets an entire board including lanes, their stories, and their tasks.
+	 * Use path variable {id} in order to get a particular board.
+	 * 
+	 * 
 	 * @author Dillon Tuck
 	 * 
 	 */
    @RequestMapping(value = "/{id}", method=RequestMethod.GET)
    public Board findOne(@PathVariable("id") int id) {
-	   System.out.println("hitting body/"+id+" controller");
 	   Board testBoard = new Board(); //ADDED
 	   testBoard.setBoardId(id); //ADDED
 	   Board board = service.getBoardById(testBoard); //MODIFIED
-	   System.out.println(board);
        return board;
    }
 }
