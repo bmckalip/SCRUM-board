@@ -25,25 +25,19 @@ public class AppService {
     @Autowired
     private UserDao userDao;
     
+    /**
+     * Service method for updating a board with a given id
+     * this method will update all parameters belonging to this board
+     * 
+     * @author Dillon Tuck
+     * @param id
+     * @param board
+     * @return
+     */
     @Transactional
 	public Board updateBoard(int id, Board board) {
-//    	
-//    	board.setBoardId(id);
-//    	
-//    	for(Lane l : board.getLane()){
-//    		board.addLane(l);
-//    		for(Story s: l.getStory()){
-//    			l.addStory(s);
-//    			for(Task t: s.getTask()){
-//    				s.addTask(t);
-//    			}
-//    		}
-//    	}
     	
-    	
-		System.out.println("board in service layer before dao: "+ board);
 		board.setBoardId(id);
-		System.out.println("board in service layer after dao: "+ board);
 		return boardDao.updateBoard(board);
 	}
 
