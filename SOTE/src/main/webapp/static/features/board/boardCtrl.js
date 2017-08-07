@@ -276,7 +276,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 
 	function retrieveBoard() {
 
-	    $http.get("http://localhost:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
+	    $http.get("http://52.14.196.207:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
 		  .then(function(response){ 
 			  
 			  $scope.board = response.data;
@@ -303,7 +303,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	function updateBoard() {
 		console.log("updating board");
 		
-	    $http.put("http://localhost:8085/SOTE/rest/board/1")
+	    $http.put("http://52.14.196.207:8085/SOTE/rest/board/1")
 		  .then(function(response){ 
 			  console.log(response.data);
 			  });
