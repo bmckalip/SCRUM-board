@@ -13,12 +13,15 @@ body {
 }
 
 #loginEmail, #loginPassword {
-	border: 3px solid #00BCD4;
-    opacity: 0.9;
+	/* border: 3px solid #00BCD4; */
+    /* opacity: 0.9; */
+    margin-bottom: 20px;
+    width:75%;
+    margin-left:45%;
 }
 
 #submit-login {
-	width: 30%;
+	width: 25%;
     margin-left: 35%;
 }
 

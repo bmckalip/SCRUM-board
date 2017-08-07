@@ -1,43 +1,18 @@
-<!-- ORIGINAL LOGIN
-<div class="container" ng-controller="loginCtrl">
-
-	<div id="login-body">
-		<div><h2 class="text-center">Login</h2></div>
-			<div class="form-group">
-			<label for="loginEmail">Email address</label>
-				<input id="loginEmail" class="form-control" type="text" ng-model="data.email" /> 
-				
-			<label for="loginPassword">Password</label>
-				<input id="loginPassword" class="form-control" type="text" ng-model="data.password" /> 
-			
-			<button class="btn btn-primary form-control" id="submit-login" ng-click="submitLogin">Login</button>
-		</div>
-	</div>
-	
-	
-
-	logging
-	<h1>{{data.email}}</h1>
-	<h1>{{data.password}}</h1>
-</div> -->
-
-
-<div id="SOTELoginBackground" class="container" data-ng-controller="loginCtrl">
+<div id="SOTELoginBackground" class="container center-block" data-ng-controller="loginCtrl">
 		<div class="loginimgcontainer">
 			<img class="uglylogo" src="static/resources/sote-logo.png">
 		</div>
 		<div class="form-group"> 
-			<label id="emailLabel" for="inputEmail" class="col-sm-2 col-sm-offset-1 control-label">Email: </label>
 			<div class="col-sm-7">
-				<input type="email" class="form-control" id="loginEmail" placeholder="Email" name = "email" data-ng-model="data.email">
+				<input style="margin-bottom: 20px;" type="email" class="form-control" id="loginEmail" placeholder="Email" name = "email" data-ng-model="data.email">
 			</div>
 		</div>
 		<div class="form-group">
-			<label id="passwordLabel" for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">Password: </label>
 			<div class="col-sm-7">
-				<input type="password" class="form-control" id="loginPassword" placeholder="Password" name = "password" data-ng-model="data.password">
+				<input style="margin-bottom: 20px;" type="password" class="form-control" id="loginPassword" placeholder="Password" name = "password" data-ng-model="data.password">
 			</div>
 		</div>
+		
 		<div class="form-group">
 			<div id="centersubmit">
 				<button class="btn btn-info form-control" id="submit-login" data-ng-click="submitLogin()">Login</button>
