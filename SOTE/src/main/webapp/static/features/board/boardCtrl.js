@@ -67,19 +67,15 @@ app.controller('boardCtrl', function($http,$scope) {
 	    } else if(!lane || !lane.story){
 	    	var textnode = document.createTextNode(title.value);
 	    	node.classList.add( i - 1 );
-//	    	
-//	     	lane.story = [];
-//	    	$scope.addToStoryList = {};
-//	    	
-//	    	$scope.addToStoryList = {
-//	    			"storyId": i ,
-//	    	        "storyTitle": textnode,
-//	    	        "storyDescription":"Test2 Description",
-//	    	        "storyPoints":5,
-//	    	      };
-//	        lane.story.push($scope.addToStoryList);
-//	        console.log()
+	    	console.log(lane);
 	    	
+	    	$scope.addStoryToJson = {
+	    				storyId: i ,
+	    	        	storyTitle: title.value,
+	    	        	storyDescription:"Default story description",
+	    	       		storyPoints:5,
+	    	      };
+	    	console.log($scope.addStoryToJson);
 	    }
 		
 		
@@ -155,10 +151,18 @@ app.controller('boardCtrl', function($http,$scope) {
 	    if(lane.laneId){
 	    	var laneTitle = document.createTextNode(lane.laneName); 
 	    	
-	    	console.log("blah blah blah");
 	    	console.log(lane.laneId);
 	    } else{
 	    	var laneTitle = document.createTextNode("Default Title"); 
+	    	
+	    	
+	    	$scope.addLaneToJson = {
+    				laneName: "Default Title"
+    	      };
+    	console.log($scope.addLaneToJson);
+    	
+    	
+    	
 	    }
 
 	    
@@ -220,8 +224,9 @@ app.controller('boardCtrl', function($http,$scope) {
 	    
 	    console.log(target.attributes.id);
 	    
-	    target.parentNode.removeChild(target);
 	    
+	    
+	    target.parentNode.removeChild(target);
 	    
 	    j--;
 	    
@@ -233,22 +238,33 @@ app.controller('boardCtrl', function($http,$scope) {
 	function removeStory(e){
 		var target = e.target.parentNode;
 		
-		console.log(target.attributes.id);
+		
+		
+		element = target.id;
+		
+		var res = element.charAt(5);
+		console.log(res);			//Grabs number id of story to be deleted (needs -1 to match db)
 		
 		target.parentNode.removeChild(target);
-		
-		
+
 		i--;
 	}
 	
 	
 	
 //Edits a lanes header 
-	function updateLaneHead() {
+	function updateLaneHead(lane) {
 
 		// add code to submit edited title into db
 		console.log("Editing Lane Header");
 
+    	
+    	$scope.addLaneToJson = {
+				laneName: 
+	      };
+	console.log($scope.addLaneToJson);
+		
+		
 	}
 
 	
