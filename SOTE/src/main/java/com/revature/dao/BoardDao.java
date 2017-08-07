@@ -1,5 +1,7 @@
 package com.revature.dao;
 
+import java.util.Set;
+
 import com.revature.pojo.Board;
 
 public interface BoardDao {
@@ -9,6 +11,7 @@ public interface BoardDao {
 	
 	//READ
     public Board getBoardById(Board board);
+    public Set<Board> getAllBoards();
 	
 	//UPDATE
 	public void changeBoardName(Board b);
@@ -17,4 +20,6 @@ public interface BoardDao {
 	//DELETE
 	public void deleteBoardById(Board b);
 	void deleteBoard(Board board);
+
+	
 }

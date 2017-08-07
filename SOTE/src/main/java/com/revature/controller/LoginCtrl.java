@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.pojo.User;
 import com.revature.service.AppService;
 
+/**
+ * 
+ * @author Adeo
+ *
+ */
+
 @RestController
 //@RequestMapping("/login")
 public class LoginCtrl {

@@ -13,7 +13,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	 document.getElementById("addSwimLane").addEventListener("click", addALane);
 	 document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
 	 document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
-//	 document.getElementById("openBurnDown").addEventListener("click", openBurndownChart/*?*/);
+	 document.getElementById("openBurnDown").addEventListener("click", openBurnDownModal);
 	 document.getElementById("updateBoard").addEventListener("click",updateBoard);
 
 	// Add click event to story titles to open modal to add stories
@@ -55,7 +55,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 		var deleteStryBtn = document.createElement("BUTTON");		
 		
 		
-		deleteStryBtn.className += " " + "glyphicon glyphicon-remove";
+		deleteStryBtn.className += " " + "glyphicon glyphicon-remove btn btn-danger";
 		deleteStryBtn.setAttribute('title', "Delete Story");
 		deleteStryBtn.id = "story" + i + "Btn";
 
@@ -69,19 +69,15 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    } else if(!lane || !lane.story){
 	    	var textnode = document.createTextNode(title.value);
 	    	node.classList.add( i - 1 );
-//	    	
-//	     	lane.story = [];
-//	    	$scope.addToStoryList = {};
-//	    	
-//	    	$scope.addToStoryList = {
-//	    			"storyId": i ,
-//	    	        "storyTitle": textnode,
-//	    	        "storyDescription":"Test2 Description",
-//	    	        "storyPoints":5,
-//	    	      };
-//	        lane.story.push($scope.addToStoryList);
-//	        console.log()
+	    	console.log(lane);
 	    	
+	    	$scope.addStoryToJson = {
+	    				storyId: i ,
+	    	        	storyTitle: title.value,
+	    	        	storyDescription:"Default story description",
+	    	       		storyPoints:5,
+	    	      };
+	    	console.log($scope.addStoryToJson);
 	    }
 		
 		
@@ -142,7 +138,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    panelHeaderP.addEventListener("blur", updateLaneHead);
 	    
 	    var deleteLaneBtn = document.createElement("BUTTON");
-	    deleteLaneBtn.className += " " + "glyphicon glyphicon-remove";
+	    deleteLaneBtn.className += " " + "glyphicon glyphicon-remove btn btn-danger";
 	    deleteLaneBtn.setAttribute('title', "Delete Lane");
 	    deleteLaneBtn.id = "lane" + j + "Btn";
 	    
@@ -157,10 +153,18 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    if(lane.laneId){
 	    	var laneTitle = document.createTextNode(lane.laneName); 
 	    	
-	    	console.log("blah blah blah");
 	    	console.log(lane.laneId);
 	    } else{
 	    	var laneTitle = document.createTextNode("Default Title"); 
+	    	
+	    	
+	    	$scope.addLaneToJson = {
+    				laneName: "Default Title"
+    	      };
+    	console.log($scope.addLaneToJson);
+    	
+    	
+    	
 	    }
 
 	    
@@ -173,7 +177,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    
 	    if(j == 1){
 	    	var addStoryBtn = document.createElement("BUTTON");
-	    	addStoryBtn.className += " " + "glyphicon glyphicon-book";
+	    	addStoryBtn.className += " " + "glyphicon glyphicon-book btn btn-info";
 	    	addStoryBtn.setAttribute('title', "Add Story");
 	    	addStoryBtn.id = "addStory";
 	    	panelHeaderDiv.appendChild(addStoryBtn);
@@ -222,8 +226,9 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    
 	    console.log(target.attributes.id);
 	    
-	    target.parentNode.removeChild(target);
 	    
+	    
+	    target.parentNode.removeChild(target);
 	    
 	    j--;
 	    
@@ -235,22 +240,33 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	function removeStory(e){
 		var target = e.target.parentNode;
 		
-		console.log(target.attributes.id);
+		
+		
+		element = target.id;
+		
+		var res = element.charAt(5);
+		console.log(res);			//Grabs number id of story to be deleted (needs -1 to match db)
 		
 		target.parentNode.removeChild(target);
-		
-		
+
 		i--;
 	}
 	
 	
 	
 //Edits a lanes header 
-	function updateLaneHead() {
+	function updateLaneHead(lane) {
 
 		// add code to submit edited title into db
 		console.log("Editing Lane Header");
 
+    	
+    	$scope.updateLaneHeadToJson = {
+				laneName: lane.laneTitle
+    	}
+	console.log($scope.updateLaneHeadToJson);
+		
+		
 	}
 
 	
@@ -276,7 +292,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 
 	function retrieveBoard() {
 
-	    $http.get("http://localhost:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
+	    $http.get("http://52.14.196.207:8085/SOTE/rest/board/1")	//Select board by id, not just hardcoded
 		  .then(function(response){ 
 			  
 			  $scope.board = response.data;
@@ -303,10 +319,38 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	function updateBoard() {
 		console.log("updating board");
 		
-	    $http.put("http://localhost:8085/SOTE/rest/board/1")
+	    $http.put("http://52.14.196.207:8085/SOTE/rest/board/1")
 		  .then(function(response){ 
 			  console.log(response.data);
 			  });
 	}
+	
+	
+	function openBurnDownModal() {
+		// Get the modal
+		var modal = document.getElementById('burnDownModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("openBurnDown");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		modal.style.display = "block";
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	}
+	
+	
 
 });

@@ -6,17 +6,18 @@
  * @author Adeo, Brian
  */
 
-
-	app.controller('loginCtrl', function($scope, $http, $rootScope, $location){
-		$rootScope.user = null;
 		
+	app.controller('loginCtrl', function($scope, $http, $location, $rootScope){
+		$rootScope.user = null;
+//		console.log($rootScope.baseURL);
+		var url = "http://52.14.196.207:8085/SOTE/rest/login";
 		$scope.data = {
 				email : "",
 				password : ""
 		};
-		
 		$scope.submitLogin = function(){
-			var url ="http://localhost:8085/SOTE/rest/login";
+			
+			
 			var user = {
 				    "userEmail": $scope.data.email,
 				    "userPassword": $scope.data.password,

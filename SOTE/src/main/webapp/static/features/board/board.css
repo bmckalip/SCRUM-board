@@ -13,12 +13,14 @@ p{
 #boardTitle {
 	margin-left: 1.5%;
 	width: 25%;
+	color: white;
 }
 
 #boardDesc{
 	display: inline-block;
 	margin-left: 1.5%;
 	padding-right: 3%;
+	color: white;
 }
 
 #openBurnDown{
@@ -127,14 +129,36 @@ p{
 }
 
 .glyphicon-remove{
-    position: absolute;
-    right: 15px;
-    top: 0px;
+    position: absolute!important;
+    right: 15px!important;
+    top: 0px!important;
 }
 
 .deleteStory{
     position: absolute;
     right: 0px;
     top: 0px;
+}
+
+
+.centerBurndown{
+	display: block;
+    margin: auto;
+    width: 40%;
+}
+
+.btn-danger{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+	
+}
+
+.btn-info{
+	padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 

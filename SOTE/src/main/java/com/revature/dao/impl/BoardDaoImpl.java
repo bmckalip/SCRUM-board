@@ -1,11 +1,16 @@
 package com.revature.dao.impl;
 
-import com.revature.dao.BoardDao;
-import com.revature.pojo.Board;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.revature.dao.BoardDao;
+import com.revature.pojo.Board;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -52,5 +57,15 @@ public class BoardDaoImpl implements BoardDao{
         Session session = sessionFactory.getCurrentSession();
         session.delete(board);
     }
+
+	@Override
+	public Set<Board> getAllBoards() {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria crit = session.createCriteria(Board.class);
+		
+		Set<Board> boardSet = new HashSet<>(crit.list());
+		
+		return boardSet;
+	}
 
 }
