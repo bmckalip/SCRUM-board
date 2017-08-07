@@ -28,39 +28,63 @@
 			crossorigin="anonymous"></script>
 		
 		<!-- cssStrap - local css overriding bootstrap -->		
-		<link rel="stylesheet" href="static/features/board/board.css" type="text/css" />
+		<!-- <link rel="stylesheet" href="static/features/board/board.css" type="text/css" /> -->
 		
 		<!-- login styling -->
-		<link rel="stylesheet" href="static/features/login/login.css" type="text/css" />
+		<!-- <link rel="stylesheet" href="static/features/login/login.css" type="text/css" /> -->
+		
+		<!-- Overriding CSS -->
+		<link rel="stylesheet" href="static/resources/css/style.css" type="text/css" />
 
 	</head>
 	
-	<body data-ng-app="scrumBoard">
-		<nav class="navbar navbar-default">
+	<body id="indexBody" data-ng-app="scrumBoard">
+		<!-- <nav class="navbar navbar-default">
 			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
+				Brand and toggle get grouped for better mobile display
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
 						aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
 					</button>
-					<a class="navbar-brand" href="#!home"><span><img
-							src="static/resources/ScoteLogo.png" height="22px">OTE</span></a>
+					<a class="navbar-brand" href="#!homepage"><span><img
+							src="static/resources/Sco.png" height="22px">OTE</span></a>
 				</div>
 	
-				<!-- Collect the nav links, forms, and other content for toggling -->
+				Collect the nav links, forms, and other content for toggling
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="#!board">Board</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#!logout">Logout</a></li>
+						<li><a href="#!logout" ><span class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
 				</div>
-				<!-- /.navbar-collapse -->
-		</nav>
+			</div>
+				/.navbar-collapse
+		</nav> -->
+		
+		<div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+		    <div class="container-fluid">
+		        <div class="navbar-header">
+					<a class="navbar-brand" href="#!home"><span><img src="static/resources/sote-icon.png" height="40px">OTE</span></a>
+		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+		            </button>
+		        </div>
+		        <div class="collapse navbar-collapse navbar-menubuilder" id="bs-example-navbar-collapse-1">
+		            <ul class="nav navbar-nav navbar-left">
+		                <li>
+		                	<a href="#!board">Board</a>
+		                </li>
+		            </ul>
+		            <ul class="nav navbar-nav navbar-right">
+						<li><a href="#!logout" ><span class="glyphicon glyphicon-log-out"></span></a></li>
+					</ul>
+		        </div>
+		    </div>
+		</div>
 
 		<!-- angular view: this is called routing (to different views) -->
 		<div ng-view></div>
@@ -68,6 +92,7 @@
 		<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 		<script src="app.js"></script>
+		<script src="static/features/homepage/homepageCtrl.js"></script>
 		<script src="static/features/board/boardCtrl.js"></script>
 		<script src="static/features/login/loginCtrl.js"></script>
 	</body>

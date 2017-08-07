@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,6 @@ import com.revature.service.AppService;
  * @author Brian McKalip
  *
  */
-
-
 @RestController
 @RequestMapping("/board")
 public class BoardCtrl {
@@ -42,37 +42,55 @@ public class BoardCtrl {
 	
 		return new ResponseEntity<Board>(HttpStatus.OK);
 	}
-//	
-//	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
-//	public ResponseEntity<Board> deleteBoard(@RequestParam("id") int id){
-//		//TODO: call service method to delete board
-//		return new ResponseEntity<Board>(HttpStatus.OK);
-//	}
+
+	/**
+	 * Currently not implemented
+	 */
+	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
+	public ResponseEntity<Board> deleteBoard(@RequestParam("id") int id){
+		//TODO: call service method to delete board
+		return new ResponseEntity<Board>(HttpStatus.NOT_IMPLEMENTED);
+	}
 	
 	/**
-	 * @author Dillon Tuck
+	 * Only updates the board description, board name and board id
+	 * not the lanes, stories or tasks
 	 * 
-	 * incomplete
+	 * @author Dillon Tuck
 	 */
    @RequestMapping(value = "/{id}", method=RequestMethod.PUT)
    public Board findOne(@PathVariable("id") int id, @RequestBody Board board) {
-	   System.out.println("hitting board/"+id+" controller - PUT");
 	   board = service.updateBoard(id, board);
+	   
+	   System.out.println("board after update:" + board);
 	   
        return board;
    }
 	
 	/**
+	 * Gets an entire board including lanes, their stories, and their tasks.
+	 * Use path variable {id} in order to get a particular board.
+	 * 
+	 * 
 	 * @author Dillon Tuck
 	 * 
 	 */
    @RequestMapping(value = "/{id}", method=RequestMethod.GET)
    public Board findOne(@PathVariable("id") int id) {
-	   System.out.println("hitting body/"+id+" controller");
 	   Board testBoard = new Board(); //ADDED
 	   testBoard.setBoardId(id); //ADDED
 	   Board board = service.getBoardById(testBoard); //MODIFIED
-	   System.out.println(board);
        return board;
+   }
+   
+   /**
+    * Gets all boards
+    * 
+    * @author Dillon Tuck
+    */
+   @RequestMapping(value= "/all", method=RequestMethod.GET)
+   public Set<Board> findAll(){
+	   System.out.println("hitting the get all boards controller");
+	   return service.getAllBoards();
    }
 }

@@ -11,13 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "task")
 public class Task {
 
-    @Id
+	@Id
     @SequenceGenerator(name = "seq", sequenceName = "task_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
     @Column(name = "t_id")
@@ -29,7 +30,8 @@ public class Task {
     @Column(name = "t_status", nullable = false)
     private int taskStatus;
 
-    @JsonIgnore
+    @JsonBackReference
+//    @JsonIgnore
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "S_ID")
     private Story story;
@@ -49,7 +51,6 @@ public class Task {
                 "taskId=" + taskId +
                 ", taskDescription='" + taskDescription + '\'' +
                 ", taskStatus=" + taskStatus +
-//                ", story=" + story +
                 '}';
     }
 
@@ -76,7 +77,8 @@ public class Task {
     public void setTaskStatus(int taskStatus) {
         this.taskStatus = taskStatus;
     }
-
+    
+    @JsonIgnore
     public Story getStory() {
         return story;
     }
@@ -84,4 +86,27 @@ public class Task {
     public void setStory(Story story) {
         this.story = story;
     }
+    
+    @Override
+  	public int hashCode() {
+  		final int prime = 31;
+  		int result = 1;
+  		result = prime * result + taskId;
+  		return result;
+  	}
+
+  	@Override
+  	public boolean equals(Object obj) {
+  		if (this == obj)
+  			return true;
+  		if (obj == null)
+  			return false;
+  		if (getClass() != obj.getClass())
+  			return false;
+  		Task other = (Task) obj;
+  		if (taskId != other.taskId)
+  			return false;
+  		return true;
+  	}
+    
 }

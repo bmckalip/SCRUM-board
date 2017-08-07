@@ -3,8 +3,10 @@
  * 
  */
 
-app.controller('boardCtrl', function($http,$scope) {
-
+app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
+	//validation
+	if(!$rootScope.user){$location.path("/logout"); }
+	
 	retrieveBoard(); 		//Retrieves json containing board information
 	
 	

@@ -1,7 +1,11 @@
 package com.revature.service;
 
 import com.revature.dao.*;
+import com.revature.dao.impl.UserDaoImpl;
 import com.revature.pojo.*;
+
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +29,60 @@ public class AppService {
     @Autowired
     private UserDao userDao;
     
+    /**
+     * Service method for updating a board with a given id
+     * this method will update all parameters belonging to this board
+     * 
+     * @author Dillon Tuck
+     * @param id
+     * @param board
+     * @return
+     */
     @Transactional
 	public Board updateBoard(int id, Board board) {
+    	
 		board.setBoardId(id);
 		return boardDao.updateBoard(board);
 	}
+    
+    @Transactional
+    public User getUserById(int id){
+    	System.out.println("hit AppService.getUserById(int{id})");
+    	User user = new User();
+    	user.setUserId(id);
+    	System.out.println(user);
+    	return userDao.getUserById(user);
+    }
+    
+   
+
+    
+
+//        	public User authenticateUser(User user){
+//
+//        		UserDao dao = new UserDaoImpl();
+//
+//        		User TrUser = dao.getUserByEmail(user);
+//
+//        		
+//
+//        		if(TrUser != null && TrUser.getUserEmail().equals(user.getUserEmail())
+//
+//        				&& TrUser.getUserPassword().equals(user.getUserPassword())){
+//
+//        			return TrUser;
+//
+//        		}
+//
+//    			return user;
+//
+//        		
+//
+//        		
+//
+//        	}
+
+        
 
     @Autowired
     private BoardUserDao boardUserDao;
@@ -71,5 +124,10 @@ public class AppService {
     public Story getStoryById(Story story){return storyDao.getStoryById(story);}
 
     public BoardUser getBoardId(BoardUser boardUser){ return boardUserDao.getBoardUserByUserId(boardUser);}
+
+	public Set<Board> getAllBoards() {
+		
+		return boardDao.getAllBoards();
+	}
 
 }
