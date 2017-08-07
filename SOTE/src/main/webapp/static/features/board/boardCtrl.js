@@ -13,7 +13,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	 document.getElementById("addSwimLane").addEventListener("click", addALane);
 	 document.getElementById("boardTitle").addEventListener("blur", updateBoardTitle);
 	 document.getElementById("boardDesc").addEventListener("blur", updateBoardDesc);
-//	 document.getElementById("openBurnDown").addEventListener("click", openBurndownChart/*?*/);
+	 document.getElementById("openBurnDown").addEventListener("click", openBurnDownModal);
 	 document.getElementById("updateBoard").addEventListener("click",updateBoard);
 
 	// Add click event to story titles to open modal to add stories
@@ -55,7 +55,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 		var deleteStryBtn = document.createElement("BUTTON");		
 		
 		
-		deleteStryBtn.className += " " + "glyphicon glyphicon-remove";
+		deleteStryBtn.className += " " + "glyphicon glyphicon-remove btn btn-danger";
 		deleteStryBtn.setAttribute('title', "Delete Story");
 		deleteStryBtn.id = "story" + i + "Btn";
 
@@ -138,7 +138,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    panelHeaderP.addEventListener("blur", updateLaneHead);
 	    
 	    var deleteLaneBtn = document.createElement("BUTTON");
-	    deleteLaneBtn.className += " " + "glyphicon glyphicon-remove";
+	    deleteLaneBtn.className += " " + "glyphicon glyphicon-remove btn btn-danger";
 	    deleteLaneBtn.setAttribute('title', "Delete Lane");
 	    deleteLaneBtn.id = "lane" + j + "Btn";
 	    
@@ -177,7 +177,7 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 	    
 	    if(j == 1){
 	    	var addStoryBtn = document.createElement("BUTTON");
-	    	addStoryBtn.className += " " + "glyphicon glyphicon-book";
+	    	addStoryBtn.className += " " + "glyphicon glyphicon-book btn btn-info";
 	    	addStoryBtn.setAttribute('title', "Add Story");
 	    	addStoryBtn.id = "addStory";
 	    	panelHeaderDiv.appendChild(addStoryBtn);
@@ -261,10 +261,10 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 		console.log("Editing Lane Header");
 
     	
-    	$scope.addLaneToJson = {
-				laneName: 
-	      };
-	console.log($scope.addLaneToJson);
+    	$scope.updateLaneHeadToJson = {
+				laneName: lane.laneTitle
+    	}
+	console.log($scope.updateLaneHeadToJson);
 		
 		
 	}
@@ -324,5 +324,33 @@ app.controller('boardCtrl', function($http, $scope, $rootScope, $location) {
 			  console.log(response.data);
 			  });
 	}
+	
+	
+	function openBurnDownModal() {
+		// Get the modal
+		var modal = document.getElementById('burnDownModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("openBurnDown");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		modal.style.display = "block";
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	}
+	
+	
 
 });
