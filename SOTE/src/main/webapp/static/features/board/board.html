@@ -15,15 +15,22 @@
 
 	<h2 id="boardTitle" contenteditable="true" ng-model="boardTitle"> {{ board.boardTitle }}</h2>
 	<h4 id="boardDesc" contenteditable="true" ng-model="boardDesc"> {{ board.boardDescription }}</h4>
-	<button type="button" class="glyphicon glyphicon-road" title="Add a Swimlane" id="addSwimLane"></button>
-	<button type="button" title="Burndown Chart" id="openBurnDown">Burndown Chart</button>
+	<button type="button" class="glyphicon glyphicon-road btn btn-info" title="Add a Swimlane" id="addSwimLane"></button>
+	<button type="button" title="Burndown Chart" id="openBurnDown" class="btn btn-info">Burndown Chart</button>
 	<br>
 
 
 
 	<div>
-		<button type="button" title="Save Changes" id="updateBoard">Save Changes</button><br><br>
+		<button type="button" title="Save Changes" class="btn btn-info" id="updateBoard">Save Changes</button><br><br>
 	</div>
 		
+		
+	<!-- This is to display a modal for burndown -->	
+	<div id="burnDownModal" class="modal">
+	
+		<span class="close">&times;</span>
+		<img alt="Burndown Not Found" class="centerBurndown" src="https://s-media-cache-ak0.pinimg.com/originals/69/bd/82/69bd8236c1e0c69050f7513a76360a09.jpg">
+	</div>
 	
 </div>
